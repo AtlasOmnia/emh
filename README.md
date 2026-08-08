@@ -8,7 +8,7 @@ For a plain-language introduction, see [docs/user-guide.md](docs/user-guide.md).
 
 Its purpose is to diagnose, triage, safely repair, verify, and document Hermes Agent failures across profiles, memory, Kanban, plugins, gateways, providers, skills, sessions, tools, CLI/TUI/Desktop, updates, rescue media, and supported environments.
 
-Distribution version: `0.2.4`.
+Distribution version: `0.2.5`.
 
 ## Skill inventory and version policy
 

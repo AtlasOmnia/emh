@@ -72,7 +72,7 @@ def test_manifest_has_required_metadata_and_owned_paths():
     manifest = yaml.safe_load((ROOT / "distribution.yaml").read_text(encoding="utf-8"))
 
     assert manifest["name"] == "emh"
-    assert manifest["version"] == "0.2.4"
+    assert manifest["version"] == "0.2.5"
     assert manifest["author"] == "Jonathan Rivera"
     assert manifest["license"] == "UNLICENSED"
     assert manifest["hermes_requires"] == ">=0.14.0"
@@ -114,7 +114,7 @@ def test_installed_distribution_loader_validates_manifest_and_version_requiremen
 
     assert manifest is not None
     assert manifest.name == "emh"
-    assert manifest.version == "0.2.4"
+    assert manifest.version == "0.2.5"
     assert manifest.hermes_requires == ">=0.14.0"
     assert manifest.distribution_owned == ["SOUL.md", "skills", "skins"]
     check_hermes_requires(manifest.hermes_requires, "0.20.0")
@@ -198,7 +198,7 @@ def test_readme_documents_exact_inventory_and_mixed_version_policy():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     lower = readme.lower()
 
-    assert "distribution version: `0.2.4`" in lower
+    assert "distribution version: `0.2.5`" in lower
     assert all(f"`{name}`" in readme for name in REQUIRED_SKILLS)
     assert "untouched v0.1 skills remain at `0.1.0`" in lower
     assert "thirteen v0.2 skills are `0.2.0`" in lower

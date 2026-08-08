@@ -2,6 +2,13 @@
 
 All notable changes to the local EMH distribution candidate are recorded here. This repository is `UNLICENSED`; changelog entries do not represent a published release.
 
+## 0.2.5 candidate — 2026-08-08
+
+### Changed
+
+- `emh-orientation` now explains the full update model during `setup`: what updates (distribution-owned files only, never operator state), how EMH detects updates (weekly read-only version comparison + CHANGELOG delta), how updates are applied (`hermes profile update emh` — always an explicit operator action, never self-updating), and the remote-availability gate for the check.
+- Distribution version advanced to `0.2.5`; no skill contract changed.
+
 ## 0.2.4 candidate — 2026-08-08
 
 ### History note
