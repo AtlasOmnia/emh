@@ -214,6 +214,9 @@ def _is_official_url(url: str) -> bool:
         ) or (
             host == "api.github.com"
             and (path == "/repos/AtlasOmnia/emh" or path.startswith("/repos/AtlasOmnia/emh/"))
+        ) or (
+            host == "raw.githubusercontent.com"
+            and path.startswith("/AtlasOmnia/emh/")
         )
     except ValueError:
         return False
@@ -453,6 +456,8 @@ def test_scan_text_rejects_every_nonofficial_url_form_but_allows_official_famili
         "https://" + "github.com/AtlasOmnia/emh.git",
         "https://" + "github.com/AtlasOmnia/emh/releases/latest",
         "https://" + "api.github.com/repos/AtlasOmnia/emh/releases",
+        "https://" + "raw.githubusercontent.com/AtlasOmnia/emh/main/distribution.yaml",
+        "https://" + "raw.githubusercontent.com/AtlasOmnia/emh/main/skills/emh-triage/SKILL.md",
     ]
     nonofficial = [
         "http://" + "example.com/public",

@@ -2,6 +2,17 @@
 
 All notable changes to the local EMH distribution candidate are recorded here. This repository is `UNLICENSED`; changelog entries do not represent a published release.
 
+## 0.2.6 candidate — 2026-08-08
+
+### Added
+
+- `emh-triage` gained the **upstream knowledge fallback**: when local evidence runs out, a read-only probe (`scripts/upstream_check.py`, stdlib-only) compares the installed distribution version against the published GitHub repo and can fetch the relevant subsystem files as labeled **upstream vX — not installed** context (Hypothesis-class). The fallback never installs, updates, git-fetches, or writes; applying an update stays a separate approved action.
+- Public-safety gate now allows the distribution's own `raw.githubusercontent.com/AtlasOmnia/emh` family.
+
+### Changed
+
+- Distribution version advanced to `0.2.6`; no skill contract changed.
+
 ## 0.2.5 candidate — 2026-08-08
 
 ### Changed
