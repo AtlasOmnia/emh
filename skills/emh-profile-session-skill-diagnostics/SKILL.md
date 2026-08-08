@@ -3,7 +3,7 @@ name: emh-profile-session-skill-diagnostics
 description: Use when profile isolation, session context, skill discovery, or tool registration differs across Hermes invocations or platforms.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

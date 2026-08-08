@@ -3,7 +3,7 @@ name: emh-triage
 description: Use when a Hermes Agent symptom needs an evidence-first, read-only diagnostic triage and a safe escalation packet.
 version: 0.1.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 ---
 

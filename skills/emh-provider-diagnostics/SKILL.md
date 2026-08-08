@@ -3,7 +3,7 @@ name: emh-provider-diagnostics
 description: Use when Hermes provider or model behavior requires separating configuration, reachability, authentication, capability, fallback, and privacy.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

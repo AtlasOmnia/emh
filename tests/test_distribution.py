@@ -74,7 +74,7 @@ def test_manifest_has_required_metadata_and_owned_paths():
     assert manifest["name"] == "emh"
     assert manifest["version"] == "0.2.6"
     assert manifest["author"] == "Jonathan Rivera"
-    assert manifest["license"] == "UNLICENSED"
+    assert manifest["license"] == "MIT"
     assert manifest["hermes_requires"] == ">=0.14.0"
     assert manifest["distribution_owned"] == ["SOUL.md", "skills/", "skins/"]
     assert manifest["skills"] == list(REQUIRED_SKILLS)
@@ -168,7 +168,7 @@ def test_all_portable_skills_have_public_contract_frontmatter_and_sections():
         assert frontmatter["name"] == name
         assert frontmatter["version"] == EXPECTED_SKILL_VERSIONS[name]
         assert frontmatter["author"] == "Jonathan Rivera"
-        assert frontmatter["license"] == "UNLICENSED"
+        assert frontmatter["license"] == "MIT"
         assert frontmatter["platforms"] == ["linux", "macos", "windows"]
         assert isinstance(frontmatter["description"], str)
         assert frontmatter["description"].startswith("Use when ")

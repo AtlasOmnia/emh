@@ -3,7 +3,7 @@ name: emh-update-recovery
 description: Use when a Hermes update is being assessed, interrupted, failed, or requires bounded recovery, rollback planning, and post-update verification.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

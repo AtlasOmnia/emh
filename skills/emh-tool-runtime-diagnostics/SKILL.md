@@ -3,7 +3,7 @@ name: emh-tool-runtime-diagnostics
 description: Use when a Hermes tool is absent, unavailable, denied, malformed, mis-dispatched, truncated, or dependent on a failing execution backend.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

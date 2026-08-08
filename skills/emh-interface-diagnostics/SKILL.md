@@ -3,7 +3,7 @@ name: emh-interface-diagnostics
 description: Use when Hermes CLI, TUI, or Desktop surfaces fail to start, route, render, accept input, stream, or agree across the same session.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

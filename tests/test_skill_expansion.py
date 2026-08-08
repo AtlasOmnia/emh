@@ -82,7 +82,7 @@ def test_v02_frontmatter_matches_public_skill_contract():
         assert metadata["description"].startswith("Use when ")
         assert metadata["version"] == "0.2.0"
         assert metadata["author"] == "Jonathan Rivera"
-        assert metadata["license"] == "UNLICENSED"
+        assert metadata["license"] == "MIT"
         assert metadata["platforms"] == ["linux", "macos", "windows"]
         hermes = metadata["metadata"]["hermes"]
         assert hermes["tags"]

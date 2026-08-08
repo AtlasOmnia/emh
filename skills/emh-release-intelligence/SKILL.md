@@ -3,7 +3,7 @@ name: emh-release-intelligence
 description: Use when a Hermes installation needs a read-only version, source, Git-state, or official-release comparison before discussing an update.
 version: 0.1.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 ---
 

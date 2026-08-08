@@ -3,7 +3,7 @@ name: emh-nightly-self-check
 description: Use when operating the recurring nightly read-only Hermes health self-check (core health, sessions, retention, memory, storage, cron fleet); detects anomalies without repairing.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

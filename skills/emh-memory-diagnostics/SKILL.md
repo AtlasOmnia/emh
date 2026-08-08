@@ -3,7 +3,7 @@ name: emh-memory-diagnostics
 description: Use when Hermes memory appears missing, stale, profile-scoped incorrectly, or dependent on an optional external provider.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

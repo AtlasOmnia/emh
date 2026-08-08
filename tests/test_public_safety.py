@@ -650,7 +650,7 @@ def test_all_skill_frontmatter_is_real_yaml_and_public_safe():
         assert metadata["name"] == path.parent.name
         assert metadata["version"] == EXPECTED_SKILL_VERSIONS[path.parent.name]
         assert metadata["author"] == "Jonathan Rivera"
-        assert metadata["license"] == "UNLICENSED"
+        assert metadata["license"] == "MIT"
         assert metadata["platforms"] == ["linux", "macos", "windows"]
         assert metadata["description"].startswith("Use when ")
         assert metadata["description"].strip() == metadata["description"]
@@ -686,7 +686,6 @@ def test_repository_has_no_bundled_runtime_or_remote_artifact_files():
         "credentials.json",
         "auth.json",
         "cookies.txt",
-        "license",
         "copying",
         "cron",
         "mcp",

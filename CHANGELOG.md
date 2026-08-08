@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the local EMH distribution candidate are recorded here. This repository is `UNLICENSED`; changelog entries do not represent a published release.
+All notable changes to the local EMH distribution candidate are recorded here. This repository is MIT-licensed; changelog entries do not represent a published release.
 
 ## 0.2.6 candidate — 2026-08-08
 

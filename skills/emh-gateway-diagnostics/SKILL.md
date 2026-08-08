@@ -3,7 +3,7 @@ name: emh-gateway-diagnostics
 description: Use when Hermes gateway messaging fails and service health, adapter authentication, provider inference, routing, or outbound delivery may be confused.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

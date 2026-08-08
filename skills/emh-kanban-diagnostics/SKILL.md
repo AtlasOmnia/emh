@@ -3,7 +3,7 @@ name: emh-kanban-diagnostics
 description: Use when Hermes Kanban queue, dispatcher, gateway, worker, task run, or worker log state appears stuck or inconsistent.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

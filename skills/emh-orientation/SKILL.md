@@ -3,7 +3,7 @@ name: emh-orientation
 description: Use when the operator starts an EMH session with "setup" or asks to configure optional integrations; walks through consent for the nightly health cron and the repo update-check cron on the default profile.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

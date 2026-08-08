@@ -3,7 +3,7 @@ name: emh-plugin-diagnostics
 description: Use when a Hermes backend plugin or Desktop plugin is absent, unexpected, disabled, or behaving differently at runtime.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

@@ -3,7 +3,7 @@ name: emh-environment-diagnostics
 description: Use when Hermes behavior differs by operating system, WSL boundary, host, shell, filesystem, network, process context, or execution backend.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

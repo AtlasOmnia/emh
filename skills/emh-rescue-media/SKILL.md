@@ -3,7 +3,7 @@ name: emh-rescue-media
 description: Use when building, refreshing, or deploying USB rescue media for a Hermes installation; redacted baseline, stdlib-only break-glass collector, encrypted patient snapshot, narrowest-repair recovery.
 version: 0.2.0
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:

@@ -99,4 +99,4 @@ Official documentation is authoritative: https://hermes-agent.nousresearch.com/d
 
 ## License
 
-This distribution is **UNLICENSED**. It is not an endorsement or affiliation claim.
+This distribution's original source, skills, documentation, configuration, tests, and artwork are licensed under the MIT License; see [LICENSE](LICENSE). The EMH name and any Star Trek, Paramount, or other third-party marks are not granted by this license. EMH remains an unofficial, fan-inspired, and unaffiliated concept.

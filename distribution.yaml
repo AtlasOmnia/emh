@@ -2,7 +2,7 @@ name: emh
 display_name: EMH — Emergency Medical Hermes
 version: 0.2.6
 author: Jonathan Rivera
-license: UNLICENSED
+license: MIT
 purpose: >-
   Diagnose, triage, safely repair, verify, and document Hermes Agent failures
   across profiles, memory, Kanban, plugins, gateways, providers, skills,
