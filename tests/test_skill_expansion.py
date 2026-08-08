@@ -21,6 +21,7 @@ EXPECTED_VERSIONS = {
     "emh-update-recovery": "0.2.0",
     "emh-nightly-self-check": "0.2.0",
     "emh-orientation": "0.2.0",
+    "emh-rescue-media": "0.2.0",
 }
 
 
@@ -57,6 +58,7 @@ def test_exact_skill_inventory_and_intentional_mixed_versions():
         "emh-update-recovery",
         "emh-nightly-self-check",
         "emh-orientation",
+        "emh-rescue-media",
     ))
 
 
@@ -101,6 +103,7 @@ V02_SKILLS = (
     "emh-update-recovery",
     "emh-nightly-self-check",
     "emh-orientation",
+    "emh-rescue-media",
 )
 REQUIRED_SECTIONS = (
     "## Overview",

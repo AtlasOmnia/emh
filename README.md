@@ -12,11 +12,11 @@ For a plain-language introduction, see [docs/user-guide.md](docs/user-guide.md).
 
 Its purpose is to diagnose, triage, safely repair, verify, and document Hermes Agent failures across profiles, memory, Kanban, plugins, gateways, providers, skills, sessions, tools, CLI/TUI/Desktop, updates, and supported environments.
 
-Distribution version: `0.2.2`.
+Distribution version: `0.2.3`.
 
 ## Skill inventory and version policy
 
-The distribution contains exactly fourteen class-level skills. Two untouched v0.1 skills remain at `0.1.0`; twelve v0.2 skills are `0.2.0`. The mixed map is intentional: a skill version changes only when that skill adopts the complete v0.2 workflow and safety contract.
+The distribution contains exactly fifteen class-level skills. Two untouched v0.1 skills remain at `0.1.0`; thirteen v0.2 skills are `0.2.0`. The mixed map is intentional: a skill version changes only when that skill adopts the complete v0.2 workflow and safety contract.
 
 | Skill | Version | Scope |
 | --- | --- | --- |
@@ -34,6 +34,7 @@ The distribution contains exactly fourteen class-level skills. Two untouched v0.
 | `emh-update-recovery` | `0.2.0` | Update readiness, failure classification, and rollback planning |
 | `emh-nightly-self-check` | `0.2.0` | Recurring read-only nightly health sweep (core, sessions, retention, memory, storage, cron fleet) |
 | `emh-orientation` | `0.2.0` | First-run consent flow: nightly health cron and repo update-check on the default profile |
+| `emh-rescue-media` | `0.2.0` | Build/refresh/deploy USB rescue media: redacted baseline, stdlib-only break-glass collector, encrypted patient snapshot, narrowest-repair recovery |
 
 ## Safety and scope
 

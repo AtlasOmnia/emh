@@ -2,6 +2,17 @@
 
 All notable changes to the local EMH distribution candidate are recorded here. This repository is `UNLICENSED`; changelog entries do not represent a published release.
 
+## 0.2.3 candidate — 2026-08-08
+
+### Added
+
+- Added `emh-rescue-media` (0.2.0), the USB rescue-media skill: redacted machine baseline, stdlib-only break-glass collector (`scripts/breakglass_collect.py`, no Hermes imports — runs when Hermes cannot), two-layer media (plaintext rescue environment vs encrypted patient snapshot with an off-media passphrase-derived key), scope-chosen snapshots, mandatory refresh-and-test hygiene, and the collector-first narrowest-repair deploy sequence. Portable media only — a bootable OS rescue disk remains explicitly out of scope.
+- Distribution inventory advanced to fifteen class-level skills (thirteen at 0.2.0, two untouched at 0.1.0); manifest and README updated to `0.2.3`.
+
+### Changed
+
+- Distribution version advanced to `0.2.3`; no existing skill contract changed.
+
 ## 0.2.2 candidate — 2026-08-08
 
 ### Added
