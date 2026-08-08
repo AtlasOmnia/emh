@@ -110,3 +110,5 @@ When an anomaly exceeds the sweep or needs a repair, escalate with a redacted pa
 ## Cron registration
 
 The canonical deployment registers this skill as a self-contained job (schedule `0 3 * * *`, read-only toolsets `terminal, file`, a cost-effective provider/model, `deliver` to a channel the operator actually reads). The job prompt is the six-domain workflow above plus the output contract; it must not attach repair instructions. Re-register after Hermes updates only when command names or store paths change.
+
+**Delivery requires channels in the owning profile.** Cron jobs are profile-scoped, and a profile does not inherit the default profile's gateway channels or bot tokens. Register the job in a profile that has a working delivery channel (for example the default profile), or configure the owning profile's own channel (bot token in the profile-local `.env` plus the platform enabled in its `config.yaml`) before relying on `deliver: 'telegram'` / `'all'`. Without a configured channel, `deliver: 'local'` is the only truthful option and the operator must check the profile's `cron/output/` directory manually — there is no proactive notification.
