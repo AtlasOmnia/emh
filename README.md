@@ -47,10 +47,16 @@ Evidence labels are: Observed; Reproduced; Confirmed in installed source; Offici
 The commands below are instructions only; they do not perform a live install. Use a disposable Hermes home for testing:
 
 ```bash
-REPO_DIR="$PWD"
-TEST_HERMES_HOME="$(mktemp -d)"
+REPO_DIR="$PWD"                                    # where you cloned/downloaded EMH
+TEST_HERMES_HOME="$(mktemp -d)"                    # a safe scratch space
 HERMES_HOME="$TEST_HERMES_HOME" hermes profile install "$REPO_DIR" --name emh -y
 HERMES_HOME="$TEST_HERMES_HOME" hermes profile info emh
+```
+
+Clone the distribution:
+
+```bash
+git clone https://github.com/AtlasOmnia/emh.git
 ```
 
 Read `SOUL.md` and the installed skills before invoking the profile. No provider, model, credential, `.env`, or `config.yaml` is bundled.
