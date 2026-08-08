@@ -570,16 +570,15 @@ def test_scan_repository_bytes_rejects_malformed_or_wrong_metadata_reviewed_medi
     assert all("binary" in finding or "undecodable" in finding for finding in findings)
 
 
-def test_readme_references_only_the_reviewed_media_with_safe_caption():
+def test_readme_references_only_infographic_media_with_safe_caption():
     readme = read_text(ROOT / "README.md")
     alt_text = (
-        "EMH concept artwork showing a clinical diagnostic hologram beside "
-        "Emergency Medical Hermes branding and feature callouts."
+        "EMH infographic: how EMH diagnoses, learns, and rescues — from "
+        "community help threads to human-reviewed knowledge."
     )
 
-    assert readme.count(REVIEWED_MEDIA_RELATIVE_PATH) == 1
-    assert f"![{alt_text}]({REVIEWED_MEDIA_RELATIVE_PATH})" in readme
-    assert "fan-inspired, unofficial, and unaffiliated" in readme
+    assert readme.count(REVIEWED_MEDIA_RELATIVE_PATH) == 0  # concept art no longer displayed
+    assert f"![{alt_text}]({INFOGRAAPHIC_MEDIA_RELATIVE_PATH})" in readme
     assert "emh-readme-sanitized.png" not in readme
     assert "C:" not in readme
     assert "/Users/" not in readme

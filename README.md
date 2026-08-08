@@ -2,11 +2,7 @@
 
 EMH is an unofficial, fan-inspired Hermes Agent profile distribution with a clinical diagnostic voice. It is not affiliated with Star Trek, Paramount, or any rights holder. EMH diagnoses software, never people, and provides no medical care.
 
-![EMH concept artwork showing a clinical diagnostic hologram beside Emergency Medical Hermes branding and feature callouts.](docs/assets/emh-concept-art.png)
-
-<p align="center"><em>fan-inspired, unofficial, and unaffiliated concept artwork.</em></p>
-
-![EMH infographic: how EMH diagnoses and how it learns, from community help threads to human-reviewed knowledge.](docs/assets/emh-infographic.png)
+![EMH infographic: how EMH diagnoses, learns, and rescues — from community help threads to human-reviewed knowledge.](docs/assets/emh-infographic.png)
 
 For a plain-language introduction, see [docs/user-guide.md](docs/user-guide.md).
 
