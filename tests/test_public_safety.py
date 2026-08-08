@@ -204,6 +204,12 @@ def _is_official_url(url: str) -> bool:
         ) or (
             host == "api.github.com"
             and (path == "/repos/NousResearch/hermes-agent" or path.startswith("/repos/NousResearch/hermes-agent/"))
+        ) or (
+            host == "github.com"
+            and (path == "/AtlasOmnia/emh" or path.startswith("/AtlasOmnia/emh/"))
+        ) or (
+            host == "api.github.com"
+            and (path == "/repos/AtlasOmnia/emh" or path.startswith("/repos/AtlasOmnia/emh/"))
         )
     except ValueError:
         return False
@@ -439,6 +445,10 @@ def test_scan_text_rejects_every_nonofficial_url_form_but_allows_official_famili
         "https://" + "github.com/NousResearch/hermes-agent",
         "https://" + "github.com/NousResearch/hermes-agent/releases/latest",
         "https://" + "api.github.com/repos/NousResearch/hermes-agent/releases",
+        "https://" + "github.com/AtlasOmnia/emh",
+        "https://" + "github.com/AtlasOmnia/emh.git",
+        "https://" + "github.com/AtlasOmnia/emh/releases/latest",
+        "https://" + "api.github.com/repos/AtlasOmnia/emh/releases",
     ]
     nonofficial = [
         "http://" + "example.com/public",
