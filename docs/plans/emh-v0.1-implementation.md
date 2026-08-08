@@ -10,7 +10,7 @@
 
 **Verified contract baseline (2026-08-07):**
 - Active CLI: Hermes Agent v0.20.0 (2026.8.3), git install.
-- Active Python: `/Users/jonathan/.hermes/hermes-agent/venv/bin/python`.
+- Active Python: `<hermes-home>/venv/bin/python`.
 - Distribution support first shipped in Hermes v0.14.0 (`v2026.5.16`); set `hermes_requires: ">=0.14.0"` because the artifact uses only that distribution contract plus ordinary skills/scripts.
 - Current official release: Hermes Agent v0.20.0 (`v2026.8.3`).
 - Authoritative distribution docs: https://hermes-agent.nousresearch.com/docs/user-guide/profile-distributions and https://hermes-agent.nousresearch.com/docs/reference/profile-commands.
