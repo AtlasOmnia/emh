@@ -57,6 +57,25 @@ git clone https://github.com/AtlasOmnia/emh.git
 
 Read `SOUL.md` and the installed skills before invoking the profile. No provider, model, credential, `.env`, or `config.yaml` is bundled.
 
+## First use: run `setup`
+
+After installing EMH, **run or type `setup` on your first use**. This launches `emh-orientation`, which explains the optional nightly health and repository update checks, asks for consent for each integration, and records your choices.
+
+Start an interactive EMH session and type `setup` at the prompt:
+
+```bash
+hermes --profile emh chat
+# Type: setup
+```
+
+Or invoke the first-run flow directly:
+
+```bash
+hermes --profile emh chat -q "setup"
+```
+
+For a disposable test home, prefix either command with `HERMES_HOME="$TEST_HERMES_HOME"`.
+
 ## Invoke
 
 The following are portable examples; they are instructions and do not run an install:
