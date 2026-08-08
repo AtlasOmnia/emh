@@ -1,0 +1,27 @@
+name: emh
+display_name: EMH — Emergency Medical Hermes
+version: 0.2.0
+author: Jonathan Rivera
+license: UNLICENSED
+purpose: >-
+  Diagnose, triage, safely repair, verify, and document Hermes Agent failures
+  across profiles, memory, Kanban, plugins, gateways, providers, skills,
+  sessions, tools, CLI/TUI/Desktop, updates, and supported environments.
+hermes_requires: ">=0.14.0"
+distribution_owned:
+  - SOUL.md
+  - skills/
+  - skins/
+skills:
+  - emh-triage
+  - emh-memory-diagnostics
+  - emh-kanban-diagnostics
+  - emh-plugin-diagnostics
+  - emh-gateway-diagnostics
+  - emh-provider-diagnostics
+  - emh-profile-session-skill-diagnostics
+  - emh-release-intelligence
+  - emh-interface-diagnostics
+  - emh-tool-runtime-diagnostics
+  - emh-environment-diagnostics
+  - emh-update-recovery

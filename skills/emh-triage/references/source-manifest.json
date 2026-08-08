@@ -1,0 +1,28 @@
+{
+  "retrieved_at": "2026-08-07T22:33:08Z",
+  "installed": {
+    "version": "0.20.0",
+    "install_method": "git",
+    "source_commit": "01a1037d1e6d7b6eb96a786ef282c3aea4818194",
+    "dirty": true,
+    "dirty_status_note": "Installed source checkout had unrelated local modifications; private filenames intentionally omitted."
+  },
+  "latest_official_release": {
+    "tag": "v2026.8.3",
+    "version": "0.20.0",
+    "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.3",
+    "published_at": "2026-08-03T16:57:52Z"
+  },
+  "official_sources": [
+    "https://hermes-agent.nousresearch.com/docs",
+    "https://hermes-agent.nousresearch.com/docs/user-guide/profile-distributions",
+    "https://hermes-agent.nousresearch.com/docs/reference/profile-commands",
+    "https://hermes-agent.nousresearch.com/docs/user-guide/profiles",
+    "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory",
+    "https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban",
+    "https://hermes-agent.nousresearch.com/docs/user-guide/features/plugins",
+    "https://hermes-agent.nousresearch.com/docs/integrations/providers",
+    "https://github.com/NousResearch/hermes-agent/releases/latest",
+    "https://api.github.com/repos/NousResearch/hermes-agent/releases/latest"
+  ]
+}

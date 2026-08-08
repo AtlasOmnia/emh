@@ -1,0 +1,114 @@
+name: emh
+description: "Emergency Medical Hermes — dark clinical diagnostics in cyan, mint, amber, and alert red"
+
+colors:
+  # Dark diagnostic surface shared by CLI, TUI, and Desktop.
+  background: "#020709"
+
+  # Banner and primary text hierarchy.
+  banner_border: "#167E91"
+  banner_title: "#9AF7FF"
+  banner_accent: "#2BDDF4"
+  banner_dim: "#6F929A"
+  banner_text: "#DCF2F4"
+
+  # General UI roles.
+  ui_accent: "#2BDDF4"
+  ui_text: "#DCF2F4"
+  ui_label: "#8EEFC7"
+  ui_border: "#167E91"
+  ui_ok: "#5FE0A0"
+  ui_warn: "#F6CA5D"
+  ui_error: "#EE6870"
+  ui_tool: "#2BDDF4"
+  ui_thinking: "#6F929A"
+
+  # Diff surfaces and word-level indicators.
+  diff_added: "#0B2A24"
+  diff_removed: "#32151A"
+  diff_added_word: "#5FE0A0"
+  diff_removed_word: "#FF7D87"
+
+  # Code syntax.
+  syntax_string: "#8EEFC7"
+  syntax_number: "#F6CA5D"
+  syntax_keyword: "#2BDDF4"
+  syntax_comment: "#6F929A"
+
+  # CLI and TUI chrome.
+  prompt: "#9AF7FF"
+  input_rule: "#167E91"
+  response_border: "#2BDDF4"
+  status_bar_bg: "#061318"
+  status_bar_text: "#C5E5E9"
+  status_bar_strong: "#9AF7FF"
+  status_bar_dim: "#6F929A"
+  status_bar_good: "#5FE0A0"
+  status_bar_warn: "#F6CA5D"
+  status_bar_bad: "#F28C45"
+  status_bar_critical: "#FF5F68"
+  session_label: "#8EEFC7"
+  session_border: "#167E91"
+  shell_dollar: "#8EEFC7"
+  voice_status_bg: "#061318"
+  selection_bg: "#123C46"
+  completion_menu_bg: "#061318"
+  completion_menu_current_bg: "#123C46"
+  completion_menu_meta_bg: "#081A20"
+  completion_menu_meta_current_bg: "#174C57"
+
+spinner:
+  waiting_faces:
+    - "(⚕)"
+    - "(· ·)"
+    - "(∿)"
+    - "(⌁)"
+    - "(◌)"
+  thinking_faces:
+    - "(⚕)"
+    - "(⌁)"
+    - "(∿)"
+    - "(◇)"
+    - "(◉)"
+  thinking_verbs:
+    - "checking vitals"
+    - "reading telemetry"
+    - "forming a differential"
+    - "correlating evidence"
+    - "testing the hypothesis"
+    - "preparing treatment"
+    - "verifying recovery"
+    - "writing the discharge summary"
+  wings:
+    - ["⟪⚕", "⚕⟫"]
+    - ["⟪∿", "∿⟫"]
+    - ["⟪⌁", "⌁⟫"]
+    - ["⟪╸", "╺⟫"]
+
+branding:
+  agent_name: "EMH"
+  welcome: "Please state the nature of your Hermes emergency."
+  goodbye: "Diagnostic session closed. ⚕"
+  response_label: " ⚕ EMH "
+  prompt_symbol: "⚕"
+  help_header: "(⚕) EMH Diagnostic Commands"
+
+tool_prefix: "│"
+
+# Original fan-inspired terminal lettering; no protected logo or character art.
+banner_logo: |-
+  [bold #9AF7FF]███████╗███╗   ███╗██╗  ██╗[/]
+  [bold #75EEF9]██╔════╝████╗ ████║██║  ██║[/]
+  [bold #2BDDF4]█████╗  ██╔████╔██║███████║[/]
+  [#21BFD6]██╔══╝  ██║╚██╔╝██║██╔══██║[/]
+  [#167E91]███████╗██║ ╚═╝ ██║██║  ██║[/]
+  [#0F5968]╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝[/]
+  [dim #6F929A]EMERGENCY MEDICAL HERMES // SOFTWARE DIAGNOSTICS[/]
+
+# Generic medical telemetry motif; not derived from a protected emblem.
+banner_hero: |-
+  [#167E91]╭──────────────────────────────────────────────╮[/]
+  [#2BDDF4]│  ──────╲╱─╲╱─────── ⚕ ───────╲╱─╲╱──────  │[/]
+  [#8EEFC7]│       DIAGNOSTIC SYSTEM // READ-ONLY FIRST   │[/]
+  [#167E91]╰──────────────────────────────────────────────╯[/]
+  [dim #6F929A]software diagnostics only // no medical care[/]
