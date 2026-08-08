@@ -16,6 +16,13 @@ import yaml
 ROOT = Path(__file__).parents[1]
 REVIEWED_MEDIA_RELATIVE_PATH = "docs/assets/emh-concept-art.png"
 REVIEWED_MEDIA_SHA256 = "c579fe9722afec739f88efc8c7bd4d40e5af57e78840c80906e111dd352a239c"
+INFOGRAAPHIC_MEDIA_RELATIVE_PATH = "docs/assets/emh-infographic.png"
+INFOGRAAPHIC_MEDIA_SHA256 = "1cfa86bce819c71c4180a77b5a5d20d22c6c4fcafafef582d126305d9194d618"
+# Reviewed-media registry: exact path, pinned SHA-256, expected PNG geometry.
+REVIEWED_MEDIA = {
+    REVIEWED_MEDIA_RELATIVE_PATH: {"sha256": REVIEWED_MEDIA_SHA256, "width": 1254, "height": 1254},
+    INFOGRAAPHIC_MEDIA_RELATIVE_PATH: {"sha256": INFOGRAAPHIC_MEDIA_SHA256, "width": 1254, "height": 2508},
+}
 SANITIZED_MEDIA_SOURCE = ROOT / REVIEWED_MEDIA_RELATIVE_PATH
 TRIAGE_SCRIPT = ROOT / "skills/emh-triage/scripts/collect_vitals.py"
 RELEASE_SCRIPT = ROOT / "skills/emh-release-intelligence/scripts/source_status.py"
@@ -239,18 +246,19 @@ def scan_text(relative_path: str, text: str) -> list[str]:
 
 
 def _is_exact_audited_media(relative_path: str, data: bytes) -> bool:
-    """Return true only for the reviewed PNG at its exact repository path."""
-    if relative_path != REVIEWED_MEDIA_RELATIVE_PATH:
+    """Return true only for a reviewed PNG at its exact repository path."""
+    contract = REVIEWED_MEDIA.get(relative_path)
+    if contract is None:
         return False
-    if hashlib.sha256(data).hexdigest() != REVIEWED_MEDIA_SHA256:
+    if hashlib.sha256(data).hexdigest() != contract["sha256"]:
         return False
     if len(data) < 33 or data[:8] != _AUDITED_MEDIA_SIGNATURE:
         return False
     if int.from_bytes(data[8:12], "big") != 13 or data[12:16] != b"IHDR":
         return False
-    if int.from_bytes(data[16:20], "big") != 1254:
+    if int.from_bytes(data[16:20], "big") != contract["width"]:
         return False
-    if int.from_bytes(data[20:24], "big") != 1254:
+    if int.from_bytes(data[20:24], "big") != contract["height"]:
         return False
     return data[24:29] == _AUDITED_MEDIA_IHDR
 
@@ -497,6 +505,18 @@ def test_scan_repository_bytes_allows_only_the_exact_reviewed_media_contract():
 
     assert hashlib.sha256(data).hexdigest() == REVIEWED_MEDIA_SHA256
     assert scan_repository_bytes(REVIEWED_MEDIA_RELATIVE_PATH, data) == []
+
+
+def test_infographic_media_contract_is_pinned_and_geometry_exact():
+    path = ROOT / INFOGRAAPHIC_MEDIA_RELATIVE_PATH
+    data = path.read_bytes()
+
+    assert hashlib.sha256(data).hexdigest() == INFOGRAAPHIC_MEDIA_SHA256
+    assert data[:8] == _AUDITED_MEDIA_SIGNATURE
+    assert int.from_bytes(data[16:20], "big") == 1254
+    assert int.from_bytes(data[20:24], "big") == 2508
+    assert data[24:29] == _AUDITED_MEDIA_IHDR
+    assert scan_repository_bytes(INFOGRAAPHIC_MEDIA_RELATIVE_PATH, data) == []
 
 
 def test_scan_repository_bytes_rejects_one_bit_mutation_of_reviewed_media():

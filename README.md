@@ -6,6 +6,10 @@ EMH is an unofficial, fan-inspired Hermes Agent profile distribution with a clin
 
 <p align="center"><em>fan-inspired, unofficial, and unaffiliated concept artwork.</em></p>
 
+![EMH infographic: how EMH diagnoses and how it learns, from community help threads to human-reviewed knowledge.](docs/assets/emh-infographic.png)
+
+For a plain-language introduction, see [docs/user-guide.md](docs/user-guide.md).
+
 Its purpose is to diagnose, triage, safely repair, verify, and document Hermes Agent failures across profiles, memory, Kanban, plugins, gateways, providers, skills, sessions, tools, CLI/TUI/Desktop, updates, and supported environments.
 
 Distribution version: `0.2.2`.
