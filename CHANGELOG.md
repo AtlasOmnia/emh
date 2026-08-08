@@ -2,6 +2,17 @@
 
 All notable changes to the local EMH distribution candidate are recorded here. This repository is `UNLICENSED`; changelog entries do not represent a published release.
 
+## 0.2.1 candidate — 2026-08-08
+
+### Added
+
+- Added `emh-nightly-self-check` (0.2.0), the portable contract behind the canonical daily 03:00 read-only Hermes health sweep: core health, session lifecycle, retention, memory, storage, and cron-fleet checks with the `All clear.` / `ATTENTION NEEDED` output contract, read-only allowlist, and cron registration guidance.
+- Distribution inventory advanced to thirteen class-level skills (eleven at 0.2.0, two untouched at 0.1.0); manifest and README updated to `0.2.1`.
+
+### Changed
+
+- Distribution version advanced to `0.2.1`; no v0.2 skill contract changed.
+
 ## 0.2.0 candidate — 2026-08-07
 
 ### Baseline

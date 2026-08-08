@@ -1,6 +1,6 @@
 name: emh
 display_name: EMH — Emergency Medical Hermes
-version: 0.2.0
+version: 0.2.1
 author: Jonathan Rivera
 license: UNLICENSED
 purpose: >-
@@ -25,3 +25,4 @@ skills:
   - emh-tool-runtime-diagnostics
   - emh-environment-diagnostics
   - emh-update-recovery
+  - emh-nightly-self-check
