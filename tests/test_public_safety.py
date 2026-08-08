@@ -206,7 +206,11 @@ def _is_official_url(url: str) -> bool:
             and (path == "/repos/NousResearch/hermes-agent" or path.startswith("/repos/NousResearch/hermes-agent/"))
         ) or (
             host == "github.com"
-            and (path == "/AtlasOmnia/emh" or path.startswith("/AtlasOmnia/emh/"))
+            and (
+                path == "/AtlasOmnia/emh"
+                or path == "/AtlasOmnia/emh.git"
+                or path.startswith("/AtlasOmnia/emh/")
+            )
         ) or (
             host == "api.github.com"
             and (path == "/repos/AtlasOmnia/emh" or path.startswith("/repos/AtlasOmnia/emh/"))
