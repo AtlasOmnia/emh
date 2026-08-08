@@ -74,7 +74,7 @@ Anything that reproduces by sending real messages, restarts a process, touches c
 
 ## Safety and approval boundaries
 
-Read-only first. This skill never silently:
+Read-only first. Never silently:
 
 - repairs, restarts, prunes, vacuums, consolidates memory, or changes configuration;
 - sends messages, touches credentials or auth state, or migrates data;
