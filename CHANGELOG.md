@@ -4,6 +4,10 @@ All notable changes to the local EMH distribution candidate are recorded here. T
 
 ## 0.2.4 candidate — 2026-08-08
 
+### History note
+
+- 2026-08-08: repository history rewritten for publication readiness — all commits re-authored as `AtlasOmnia <110573478+AtlasOmnia@users.noreply.github.com>`; the v0.1 planning doc's private path was scrubbed to a placeholder. SHA references in earlier entries refer to the pre-rewrite history.
+
 ### Changed
 
 - `emh-orientation` now explains rescue media as a third optional offering (not a cron): consent is recorded and the build hands off to `emh-rescue-media`; decision tree, workflow, verification, and consent-status fields updated.
