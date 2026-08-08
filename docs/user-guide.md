@@ -42,6 +42,20 @@ EMH will run read-only checks, give you a diagnosis with evidence labels, and pr
 - Reports either `All clear.` or a short `ATTENTION NEEDED` list.
 - It is **read-only** — it never restarts, prunes, or repairs anything.
 
+## Rescue media (optional)
+
+For the bad day when Hermes won't start at all, you can build a **rescue USB**:
+
+- A redacted snapshot of your machine's state (no passwords, no private data).
+- A **break-glass collector** — a tiny standalone tool that runs even when Hermes is broken or missing, because it doesn't depend on Hermes at all.
+- An **encrypted backup** of your Hermes configuration and data (encrypted with a key *you* keep somewhere safe — never on the USB itself).
+
+When recovery day comes: plug in the USB, run the collector first, compare against the last known-good state, then apply the smallest approved fix — one change at a time, verifying after each.
+
+What it is **not**: a bootable operating-system rescue disk. It rescues Hermes on a host that can still run — which covers the vast majority of real incidents.
+
+Type `setup` and ask for rescue media, or load the rescue-media skill directly.
+
 ## How EMH learns
 
 1. Help threads from the Hermes community are collected weekly.

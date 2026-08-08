@@ -17,7 +17,7 @@ ROOT = Path(__file__).parents[1]
 REVIEWED_MEDIA_RELATIVE_PATH = "docs/assets/emh-concept-art.png"
 REVIEWED_MEDIA_SHA256 = "c579fe9722afec739f88efc8c7bd4d40e5af57e78840c80906e111dd352a239c"
 INFOGRAAPHIC_MEDIA_RELATIVE_PATH = "docs/assets/emh-infographic.png"
-INFOGRAAPHIC_MEDIA_SHA256 = "1cfa86bce819c71c4180a77b5a5d20d22c6c4fcafafef582d126305d9194d618"
+INFOGRAAPHIC_MEDIA_SHA256 = "92daef32225c422c929ea0877ddad7146b492120c9b33a3a1b2ef69916cc497e"
 # Reviewed-media registry: exact path, pinned SHA-256, expected PNG geometry.
 REVIEWED_MEDIA = {
     REVIEWED_MEDIA_RELATIVE_PATH: {"sha256": REVIEWED_MEDIA_SHA256, "width": 1254, "height": 1254},

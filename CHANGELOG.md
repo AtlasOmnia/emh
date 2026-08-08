@@ -2,6 +2,14 @@
 
 All notable changes to the local EMH distribution candidate are recorded here. This repository is `UNLICENSED`; changelog entries do not represent a published release.
 
+## 0.2.4 candidate — 2026-08-08
+
+### Changed
+
+- `emh-orientation` now explains rescue media as a third optional offering (not a cron): consent is recorded and the build hands off to `emh-rescue-media`; decision tree, workflow, verification, and consent-status fields updated.
+- User guide (`docs/user-guide.md`) gained a plain-language Rescue media section; README purpose line covers rescue media.
+- Distribution version advanced to `0.2.4`; no skill contract changed.
+
 ## 0.2.3 candidate — 2026-08-08
 
 ### Added
