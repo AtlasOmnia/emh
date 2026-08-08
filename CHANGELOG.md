@@ -2,6 +2,18 @@
 
 All notable changes to the local EMH distribution candidate are recorded here. This repository is `UNLICENSED`; changelog entries do not represent a published release.
 
+## 0.2.2 candidate — 2026-08-08
+
+### Added
+
+- Added `emh-orientation` (0.2.0), the first-run consent flow: triggered by starting a session with `setup`, it inventories the operator's setup state read-only (default cron store, delivery channels, source remote), explains the optional nightly health cron and repo update-check, asks for consent per integration, and registers chosen crons on the operator's default profile where delivery channels live. The update-check is read-only and never applies updates.
+- SOUL.md now directs a `setup` session to run `emh-orientation` before anything else; README install guidance mentions the `setup` trigger.
+- Distribution inventory advanced to fourteen class-level skills (twelve at 0.2.0, two untouched at 0.1.0); manifest and README updated to `0.2.2`.
+
+### Changed
+
+- Distribution version advanced to `0.2.2`; no existing skill contract changed.
+
 ## 0.2.1 candidate — 2026-08-08
 
 ### Added

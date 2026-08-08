@@ -20,6 +20,7 @@ EXPECTED_VERSIONS = {
     "emh-environment-diagnostics": "0.2.0",
     "emh-update-recovery": "0.2.0",
     "emh-nightly-self-check": "0.2.0",
+    "emh-orientation": "0.2.0",
 }
 
 
@@ -55,6 +56,7 @@ def test_exact_skill_inventory_and_intentional_mixed_versions():
         "emh-environment-diagnostics",
         "emh-update-recovery",
         "emh-nightly-self-check",
+        "emh-orientation",
     ))
 
 
@@ -98,6 +100,7 @@ V02_SKILLS = (
     "emh-environment-diagnostics",
     "emh-update-recovery",
     "emh-nightly-self-check",
+    "emh-orientation",
 )
 REQUIRED_SECTIONS = (
     "## Overview",

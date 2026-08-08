@@ -8,11 +8,11 @@ EMH is an unofficial, fan-inspired Hermes Agent profile distribution with a clin
 
 Its purpose is to diagnose, triage, safely repair, verify, and document Hermes Agent failures across profiles, memory, Kanban, plugins, gateways, providers, skills, sessions, tools, CLI/TUI/Desktop, updates, and supported environments.
 
-Distribution version: `0.2.1`.
+Distribution version: `0.2.2`.
 
 ## Skill inventory and version policy
 
-The distribution contains exactly thirteen class-level skills. Two untouched v0.1 skills remain at `0.1.0`; eleven v0.2 skills are `0.2.0`. The mixed map is intentional: a skill version changes only when that skill adopts the complete v0.2 workflow and safety contract.
+The distribution contains exactly fourteen class-level skills. Two untouched v0.1 skills remain at `0.1.0`; twelve v0.2 skills are `0.2.0`. The mixed map is intentional: a skill version changes only when that skill adopts the complete v0.2 workflow and safety contract.
 
 | Skill | Version | Scope |
 | --- | --- | --- |
@@ -29,6 +29,7 @@ The distribution contains exactly thirteen class-level skills. Two untouched v0.
 | `emh-environment-diagnostics` | `0.2.0` | Host/platform and execution-backend separation |
 | `emh-update-recovery` | `0.2.0` | Update readiness, failure classification, and rollback planning |
 | `emh-nightly-self-check` | `0.2.0` | Recurring read-only nightly health sweep (core, sessions, retention, memory, storage, cron fleet) |
+| `emh-orientation` | `0.2.0` | First-run consent flow: nightly health cron and repo update-check on the default profile |
 
 ## Safety and scope
 
@@ -63,6 +64,8 @@ python3 skills/emh-release-intelligence/scripts/source_status.py --offline
 # Ask the installed EMH profile to triage a one-shot complaint.
 HERMES_HOME="$TEST_HERMES_HOME" hermes --profile emh chat -s emh-triage -q "Please state the nature of your Hermes emergency."
 ```
+
+Start a session with `setup` to run the `emh-orientation` skill: it explains the optional nightly health cron and repo update-check, asks for your consent per integration, and registers chosen crons on your default profile.
 
 ## Development update
 
