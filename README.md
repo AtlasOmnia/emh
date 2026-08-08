@@ -12,17 +12,17 @@ Distribution version: `0.2.0`.
 
 ## Skill inventory and version policy
 
-The distribution contains exactly twelve class-level skills. Untouched v0.1 skills remain at `0.1.0`; the four v0.2 skills are `0.2.0`. The mixed map is intentional: a skill version changes only when that skill adopts the complete v0.2 workflow and safety contract.
+The distribution contains exactly twelve class-level skills. Two untouched v0.1 skills remain at `0.1.0`; ten v0.2 skills are `0.2.0`. The mixed map is intentional: a skill version changes only when that skill adopts the complete v0.2 workflow and safety contract.
 
 | Skill | Version | Scope |
 | --- | --- | --- |
 | `emh-triage` | `0.1.0` | Unknown or mixed Hermes failures and case routing |
-| `emh-memory-diagnostics` | `0.1.0` | Built-in and external memory behavior |
-| `emh-kanban-diagnostics` | `0.1.0` | Queue, dispatcher, worker, and run state |
-| `emh-plugin-diagnostics` | `0.1.0` | Backend and Desktop plugin boundaries |
-| `emh-gateway-diagnostics` | `0.1.0` | Messaging gateway and delivery paths |
-| `emh-provider-diagnostics` | `0.1.0` | Provider, model, endpoint, and fallback state |
-| `emh-profile-session-skill-diagnostics` | `0.1.0` | Profile, session, skill discovery, and context |
+| `emh-memory-diagnostics` | `0.2.0` | Built-in and external memory behavior |
+| `emh-kanban-diagnostics` | `0.2.0` | Queue, dispatcher, worker, and run state |
+| `emh-plugin-diagnostics` | `0.2.0` | Backend and Desktop plugin boundaries |
+| `emh-gateway-diagnostics` | `0.2.0` | Messaging gateway and delivery paths |
+| `emh-provider-diagnostics` | `0.2.0` | Provider, model, endpoint, and fallback state |
+| `emh-profile-session-skill-diagnostics` | `0.2.0` | Profile, session, skill discovery, and context |
 | `emh-release-intelligence` | `0.1.0` | Read-only installed-versus-official release comparison |
 | `emh-interface-diagnostics` | `0.2.0` | Classic CLI, TUI, and Desktop interface layers |
 | `emh-tool-runtime-diagnostics` | `0.2.0` | Tool discovery through result shaping |

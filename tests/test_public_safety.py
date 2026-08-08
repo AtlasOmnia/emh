@@ -50,12 +50,12 @@ PUBLIC_COMMANDS = {
 }
 EXPECTED_SKILL_VERSIONS = {
     "emh-triage": "0.1.0",
-    "emh-memory-diagnostics": "0.1.0",
-    "emh-kanban-diagnostics": "0.1.0",
-    "emh-plugin-diagnostics": "0.1.0",
-    "emh-gateway-diagnostics": "0.1.0",
-    "emh-provider-diagnostics": "0.1.0",
-    "emh-profile-session-skill-diagnostics": "0.1.0",
+    "emh-memory-diagnostics": "0.2.0",
+    "emh-kanban-diagnostics": "0.2.0",
+    "emh-plugin-diagnostics": "0.2.0",
+    "emh-gateway-diagnostics": "0.2.0",
+    "emh-provider-diagnostics": "0.2.0",
+    "emh-profile-session-skill-diagnostics": "0.2.0",
     "emh-release-intelligence": "0.1.0",
     "emh-interface-diagnostics": "0.2.0",
     "emh-tool-runtime-diagnostics": "0.2.0",

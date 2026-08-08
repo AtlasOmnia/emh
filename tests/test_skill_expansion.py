@@ -8,12 +8,12 @@ ROOT = Path(__file__).parents[1]
 SKILLS_ROOT = ROOT / "skills"
 EXPECTED_VERSIONS = {
     "emh-triage": "0.1.0",
-    "emh-memory-diagnostics": "0.1.0",
-    "emh-kanban-diagnostics": "0.1.0",
-    "emh-plugin-diagnostics": "0.1.0",
-    "emh-gateway-diagnostics": "0.1.0",
-    "emh-provider-diagnostics": "0.1.0",
-    "emh-profile-session-skill-diagnostics": "0.1.0",
+    "emh-memory-diagnostics": "0.2.0",
+    "emh-kanban-diagnostics": "0.2.0",
+    "emh-plugin-diagnostics": "0.2.0",
+    "emh-gateway-diagnostics": "0.2.0",
+    "emh-provider-diagnostics": "0.2.0",
+    "emh-profile-session-skill-diagnostics": "0.2.0",
     "emh-release-intelligence": "0.1.0",
     "emh-interface-diagnostics": "0.2.0",
     "emh-tool-runtime-diagnostics": "0.2.0",
@@ -38,13 +38,17 @@ def test_exact_skill_inventory_and_intentional_mixed_versions():
     }
 
     assert actual == EXPECTED_VERSIONS
-    assert all(version == "0.1.0" for name, version in actual.items() if name.startswith("emh-") and name not in {
-        "emh-interface-diagnostics",
-        "emh-tool-runtime-diagnostics",
-        "emh-environment-diagnostics",
-        "emh-update-recovery",
-    })
+    assert all(actual[name] == "0.1.0" for name in (
+        "emh-triage",
+        "emh-release-intelligence",
+    ))
     assert all(actual[name] == "0.2.0" for name in (
+        "emh-memory-diagnostics",
+        "emh-kanban-diagnostics",
+        "emh-plugin-diagnostics",
+        "emh-gateway-diagnostics",
+        "emh-provider-diagnostics",
+        "emh-profile-session-skill-diagnostics",
         "emh-interface-diagnostics",
         "emh-tool-runtime-diagnostics",
         "emh-environment-diagnostics",
@@ -54,6 +58,12 @@ def test_exact_skill_inventory_and_intentional_mixed_versions():
 
 def test_v02_frontmatter_matches_public_skill_contract():
     for name in (
+        "emh-memory-diagnostics",
+        "emh-kanban-diagnostics",
+        "emh-plugin-diagnostics",
+        "emh-gateway-diagnostics",
+        "emh-provider-diagnostics",
+        "emh-profile-session-skill-diagnostics",
         "emh-interface-diagnostics",
         "emh-tool-runtime-diagnostics",
         "emh-environment-diagnostics",
@@ -75,6 +85,12 @@ def test_v02_frontmatter_matches_public_skill_contract():
 
 
 V02_SKILLS = (
+    "emh-memory-diagnostics",
+    "emh-kanban-diagnostics",
+    "emh-plugin-diagnostics",
+    "emh-gateway-diagnostics",
+    "emh-provider-diagnostics",
+    "emh-profile-session-skill-diagnostics",
     "emh-interface-diagnostics",
     "emh-tool-runtime-diagnostics",
     "emh-environment-diagnostics",
@@ -86,6 +102,7 @@ REQUIRED_SECTIONS = (
     "## Evidence collection workflow",
     "## Decision tree",
     "## Exact commands and tool calls",
+    "### Read-only allowlist",
     "## Safety and approval boundaries",
     "## Common pitfalls and recovery",
     "## Verification checklist",
@@ -131,6 +148,12 @@ def test_each_v02_skill_has_complete_diagnostic_safety_contract():
         assert "verified backup" in body
         assert "rollback" in body
         assert "Never silently" in body
+
+
+def test_migrated_legacy_skills_have_approval_gated_action_sections():
+    for name in V02_SKILLS[:6]:
+        body = skill_body(name)
+        assert re.search(r"^### Approval-gated .*", body, flags=re.MULTILINE)
 
 
 def test_each_v02_skill_defines_bounded_escalation_packet_fields():
@@ -223,6 +246,94 @@ def test_v02_triggers_counter_triggers_and_domain_layers_are_precise():
             "post-update verification",
             "source_status.py --offline",
         ),
+        "emh-memory-diagnostics": (
+            "memory",
+            "profile-scoped",
+            "memory state",
+            "session-start context snapshot",
+            "staleness",
+            "external memory provider",
+            "configured",
+            "reachable",
+            "authenticated",
+            "persisted",
+            "loaded",
+            "reset",
+        ),
+        "emh-kanban-diagnostics": (
+            "queue",
+            "dispatcher",
+            "worker",
+            "gateway",
+            "board",
+            "assignee",
+            "workspace",
+            "queued",
+            "claimed",
+            "dispatched",
+            "spawned",
+            "running",
+            "failed",
+            "completed",
+        ),
+        "emh-plugin-diagnostics": (
+            "backend plugin",
+            "desktop plugin",
+            "manifest",
+            "registration",
+            "enablement",
+            "import",
+            "runtime",
+            "inventory",
+            "settings",
+            "hot reload",
+            "ui reachability",
+            "plugin surface",
+        ),
+        "emh-gateway-diagnostics": (
+            "gateway",
+            "service/process health",
+            "adapter",
+            "authentication",
+            "provider inference",
+            "session routing",
+            "outbound delivery",
+            "ingress",
+            "inference",
+            "routing",
+            "outbound handoff",
+            "delivery stage",
+        ),
+        "emh-provider-diagnostics": (
+            "provider",
+            "model",
+            "configured",
+            "reachable",
+            "authenticated",
+            "capability",
+            "fallback",
+            "context length",
+            "runtime detection",
+            "rate limits",
+            "endpoint identity",
+            "provider state",
+            "local endpoint privacy",
+        ),
+        "emh-profile-session-skill-diagnostics": (
+            "profile",
+            "hermes_home",
+            "isolation",
+            "session context",
+            "stored session",
+            "active snapshot",
+            "skill discovery",
+            "frontmatter",
+            "enablement",
+            "tool registration",
+            "per-platform",
+            "fresh session",
+            "isolation/context state",
+        ),
     }
 
     for name, terms in expected_terms.items():
@@ -276,6 +387,58 @@ def test_v02_read_only_allowlists_are_exact_and_mutations_are_separate():
             "hermes config check",
             'read_file(path="<redacted-update-log-path>", offset=1, limit=200)',
         ),
+        "emh-memory-diagnostics": (
+            "hermes --version",
+            "hermes status --all",
+            "hermes memory status",
+            "hermes profile list",
+            "hermes profile show <profile-name>",
+            "hermes profile info <profile-name>",
+        ),
+        "emh-kanban-diagnostics": (
+            "hermes --version",
+            "hermes status --all",
+            "hermes kanban stats",
+            "hermes kanban list",
+            "hermes kanban runs <task-id>",
+            "hermes kanban log <task-id>",
+            "hermes gateway status",
+            "hermes logs gateway -n 50 --level WARNING",
+        ),
+        "emh-plugin-diagnostics": (
+            "hermes --version",
+            "hermes status --all",
+            "hermes plugins list",
+            "hermes tools list --platform cli",
+            "hermes logs list",
+            "hermes logs --component tools -n 50 --level WARNING",
+            'read_file(path="<named-non-secret-plugin-artifact>")',
+        ),
+        "emh-gateway-diagnostics": (
+            "hermes --version",
+            "hermes status --all",
+            "hermes gateway status",
+            "hermes auth list",
+            "hermes logs list",
+            "hermes logs gateway -n 50 --level WARNING",
+        ),
+        "emh-provider-diagnostics": (
+            "hermes --version",
+            "hermes status --all",
+            "hermes auth list",
+            "hermes config check",
+            "hermes logs agent -n 50 --level WARNING",
+        ),
+        "emh-profile-session-skill-diagnostics": (
+            "hermes --version",
+            "hermes status --all",
+            "hermes profile list",
+            "hermes profile show <profile-name>",
+            "hermes profile info <profile-name>",
+            "hermes sessions stats",
+            "hermes tools list --platform cli",
+            'read_file(path="<named-non-secret-skill-artifact>")',
+        ),
     }
 
     for name, commands in expected.items():
@@ -289,6 +452,12 @@ def test_v02_read_only_allowlists_are_exact_and_mutations_are_separate():
 
 def test_v02_escalation_packets_add_domain_specific_classification():
     expected = {
+        "emh-memory-diagnostics": "Memory state",
+        "emh-kanban-diagnostics": "Queue/worker state",
+        "emh-plugin-diagnostics": "Plugin surface",
+        "emh-gateway-diagnostics": "Delivery stage",
+        "emh-provider-diagnostics": "Provider state",
+        "emh-profile-session-skill-diagnostics": "Isolation/context state",
         "emh-interface-diagnostics": "Layer comparison",
         "emh-tool-runtime-diagnostics": "Pipeline classification",
         "emh-environment-diagnostics": "Cross-platform matrix",
@@ -307,7 +476,12 @@ def test_v02_references_route_new_skills_and_pin_bounded_official_sources():
         SKILLS_ROOT / "emh-triage/references/official-source-index.md"
     ).read_text(encoding="utf-8")
 
-    assert all(name in subsystem_map for name in V02_SKILLS)
+    assert all(name in subsystem_map for name in (
+        "emh-interface-diagnostics",
+        "emh-tool-runtime-diagnostics",
+        "emh-environment-diagnostics",
+        "emh-update-recovery",
+    ))
     urls = (
         "https://hermes-agent.nousresearch.com/docs/user-guide/cli",
         "https://hermes-agent.nousresearch.com/docs/user-guide/tui",

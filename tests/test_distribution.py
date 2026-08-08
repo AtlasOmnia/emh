@@ -23,6 +23,12 @@ REQUIRED_SKILLS = {
 }
 EXPECTED_SKILL_VERSIONS = {
     name: "0.2.0" if name in {
+        "emh-memory-diagnostics",
+        "emh-kanban-diagnostics",
+        "emh-plugin-diagnostics",
+        "emh-gateway-diagnostics",
+        "emh-provider-diagnostics",
+        "emh-profile-session-skill-diagnostics",
         "emh-interface-diagnostics",
         "emh-tool-runtime-diagnostics",
         "emh-environment-diagnostics",
@@ -163,7 +169,8 @@ def test_readme_documents_exact_inventory_and_mixed_version_policy():
     assert "distribution version: `0.2.0`" in lower
     assert all(f"`{name}`" in readme for name in REQUIRED_SKILLS)
     assert "untouched v0.1 skills remain at `0.1.0`" in lower
-    assert "four v0.2 skills are `0.2.0`" in lower
+    assert "ten v0.2 skills are `0.2.0`" in lower
+    assert "two untouched v0.1 skills remain at `0.1.0`" in lower
 
 
 def test_triage_references_cover_required_portable_safety_contract():
