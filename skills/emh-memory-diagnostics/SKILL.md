@@ -35,7 +35,7 @@ Use when:
 1. Record **Complaint**; **Vitals**; **Differential diagnosis**; **Confirmed diagnosis**; **Treatment**; **Post-treatment verification**; **Discharge summary or escalation packet** in that order.
 2. Capture installed version, platform, active profile, effective `HERMES_HOME` summary, and whether the session is new or resumed. Redact paths and identifiers.
 3. Establish the memory boundary: built-in MEMORY.md/USER.md, session-start context snapshot, or external memory provider. Do not combine their states.
-4. Use the read-only allowlist below to collect memory status and profile facts. Read a named artifact only when the operator identifies it as non-secret.
+4. Use the read-only allowlist below to collect memory status and profile facts. Artifact selection is explicit and limited; read a named artifact only when the operator identifies it as non-secret, and never dump or share private memory contents.
 5. For built-in memory, distinguish file presence, readable content, profile scope, and snapshot age. A stale session-start context snapshot is a staleness differential, not proof of deletion.
 6. For an external memory provider, report configured, reachable, authenticated, persisted, and loaded as separate states. Reachability does not prove persistence, and persistence does not prove that the current session loaded the fact.
 7. Compare one controlled fresh session only with explicit approval because launching it may create session or log state. Never delete a session to test loading.
@@ -71,16 +71,17 @@ These commands were checked against current Hermes help/source. Run only the sma
 - `hermes profile list`
 - `hermes profile show <profile-name>`
 - `hermes profile info <profile-name>`
+- `read_file(path="<named-non-secret-memory-artifact>", offset=1, limit=200)`
 
-`hermes profile show` and `hermes profile info` require a named profile and may display private configuration metadata; treat output as private. Do not pass a credential or copy raw memory contents into evidence.
+`hermes profile show` and `hermes profile info` require a named profile and may display private configuration metadata; treat output as private. The `read_file` probe is limited to the explicitly named artifact and the bounded first 200 lines. Never dump or share private memory contents; any private artifact read requires explicit approval immediately before reading and redaction before evidence. Do not pass a credential or copy raw memory contents into evidence.
 
 ### Approval-gated reproductions and mutations
 
 - Starting a fresh session or invoking a memory-writing path can create session, log, or memory state.
 - `hermes memory reset`, `hermes memory off`, provider setup, export, delete, migration, or profile changes are mutations.
-- Reading a named non-secret artifact beyond the allowlist is a proposed probe and still requires review when it may contain private memory.
+- Reading a named non-secret artifact beyond the allowlist is a proposed probe and still requires review when it may contain private memory; any private artifact read requires explicit approval and redaction.
 
-Every proposed action requires explicit approval immediately before execution, a verified backup when state can change, a rollback procedure, and post-change verification against the original symptom. No autonomous repair is permitted.
+Every proposed action requires explicit approval immediately before execution, a verified backup when state can change, a rollback procedure, abort condition, and post-change verification against the original symptom. Never silently mutate state or continue after an abort condition; no autonomous repair is permitted.
 
 ## Safety and approval boundaries
 

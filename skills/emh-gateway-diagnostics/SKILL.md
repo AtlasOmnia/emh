@@ -83,7 +83,7 @@ These commands were checked against current Hermes help/source. Run only the sma
 - Adapter pairing, token changes, provider/model changes, session/profile changes, outbound resend, and external network probes require explicit approval.
 - Any bounded delivery test must name the external target, data, expected message, and cleanup/rollback before approval.
 
-Every proposed action requires explicit approval immediately before execution, a verified backup of configuration/credentials where applicable, a rollback procedure, abort condition, and post-change verification. No autonomous repair is permitted.
+Every proposed action requires explicit approval immediately before execution, a verified backup of configuration/credentials where applicable, a rollback procedure, abort condition, and post-change verification. Never silently mutate gateway or delivery state or continue after an abort condition; no autonomous repair is permitted.
 
 ## Safety and approval boundaries
 

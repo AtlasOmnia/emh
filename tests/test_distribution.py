@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 import pytest
@@ -125,6 +126,31 @@ def _skill_frontmatter(path: Path) -> tuple[dict, str]:
     return parsed, body
 
 
+def _has_markdown_heading(body: str, expected: str) -> bool:
+    in_fence = False
+    fence_char = ""
+    fence_length = 0
+    for line in body.splitlines():
+        if in_fence:
+            closing = re.fullmatch(r" {0,3}([`~]{3,})\s*", line)
+            if (
+                closing
+                and closing.group(1)[0] == fence_char
+                and len(closing.group(1)) >= fence_length
+            ):
+                in_fence = False
+            continue
+        opening = re.match(r"^ {0,3}([`~]{3,})(?:.*)$", line)
+        if opening:
+            in_fence = True
+            fence_char = opening.group(1)[0]
+            fence_length = len(opening.group(1))
+            continue
+        if line == expected:
+            return True
+    return False
+
+
 def test_required_portable_skills_and_references_exist():
     for path in [*(ROOT / relative for relative in REQUIRED_SKILLS.values()), *(ROOT / relative for relative in REQUIRED_REFERENCES)]:
         assert path.is_file(), f"required distribution content is missing: {path.relative_to(ROOT)}"
@@ -153,7 +179,7 @@ def test_all_portable_skills_have_public_contract_frontmatter_and_sections():
             "## Escalation packet requirements",
         )
         for section in sections:
-            assert section in body, f"{section} missing from {relative}"
+            assert _has_markdown_heading(body, section), f"{section} missing from {relative}"
         if frontmatter["version"] == "0.2.0":
             hermes = frontmatter["metadata"]["hermes"]
             assert hermes["tags"]

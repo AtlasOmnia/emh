@@ -85,7 +85,7 @@ The profile commands require a named profile. The `read_file` path must be a nam
 - Session browse/resume, fresh session launch, delete/prune/archive/repair/recover, and context export mutate or expose session state.
 - Skill enable/disable, file edits, tool enable/disable, plugin/MCP changes, and profile/home switching change discovery or runtime exposure.
 
-Every proposed action requires explicit approval, a verified backup of the affected profile/session/config state, a rollback procedure, abort condition, and post-change verification. No autonomous repair is permitted.
+Every proposed action requires explicit approval, a verified backup of the affected profile/session/config state, a rollback procedure, abort condition, and post-change verification. Never silently mutate profile, session, skill, or configuration state or continue after an abort condition; no autonomous repair is permitted.
 
 ## Safety and approval boundaries
 

@@ -82,7 +82,7 @@ These commands do not authorize an inference request. `hermes auth list` is an i
 - Provider/model selection, endpoint configuration, credential add/remove/reset/logout, fallback order, privacy route, and profile configuration changes are mutations.
 - Credential installation, refresh, or raw-key inspection is never an autonomous diagnostic step.
 
-Every proposed action requires explicit approval, a verified backup of configuration/credential state where applicable, a rollback procedure, abort condition, and post-change verification. No autonomous repair is permitted.
+Every proposed action requires explicit approval, a verified backup of configuration/credential state where applicable, a rollback procedure, abort condition, and post-change verification. Never silently mutate provider or routing state or continue after an abort condition; no autonomous repair is permitted.
 
 ## Safety and approval boundaries
 

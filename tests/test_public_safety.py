@@ -126,6 +126,31 @@ _SENSITIVE_KEY_MARKERS = (
 )
 
 
+def _has_markdown_heading(body: str, expected: str) -> bool:
+    in_fence = False
+    fence_char = ""
+    fence_length = 0
+    for line in body.splitlines():
+        if in_fence:
+            closing = re.fullmatch(r" {0,3}([`~]{3,})\s*", line)
+            if (
+                closing
+                and closing.group(1)[0] == fence_char
+                and len(closing.group(1)) >= fence_length
+            ):
+                in_fence = False
+            continue
+        opening = re.match(r"^ {0,3}([`~]{3,})(?:.*)$", line)
+        if opening:
+            in_fence = True
+            fence_char = opening.group(1)[0]
+            fence_length = len(opening.group(1))
+            continue
+        if line == expected:
+            return True
+    return False
+
+
 def decode_bytes(data: bytes) -> str:
     """Decode repository content strictly; malformed UTF-8 is never silently skipped."""
     return data.decode("utf-8")
@@ -605,7 +630,7 @@ def test_all_skill_frontmatter_is_real_yaml_and_public_safe():
             )
         )
         for section in sections:
-            assert section in body
+            assert _has_markdown_heading(body, section)
 
 
 def test_repository_inventory_rejects_secrets_private_paths_and_copied_private_material():

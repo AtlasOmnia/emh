@@ -71,9 +71,10 @@ These commands were checked against current Hermes help/source. Run only the sma
 - `hermes tools list --platform cli`
 - `hermes logs list`
 - `hermes logs --component tools -n 50 --level WARNING`
+- `hermes logs desktop -n 50 --level WARNING`
 - `read_file(path="<named-non-secret-plugin-artifact>")`
 
-The `read_file` path must be a named, non-secret artifact supplied by the operator. Bounded logs are evidence only after redaction; do not scan plugin directories or credential files.
+`hermes logs desktop -n 50 --level WARNING` is bounded Desktop runtime evidence for main, preload, renderer, and IPC failures. Keep it separate from backend plugin inventory (`hermes plugins list`) and tool inventory. The `read_file` path must be a named, non-secret artifact supplied by the operator. Bounded logs are evidence only after redaction; do not scan plugin directories or credential files.
 
 ### Approval-gated reproductions and mutations
 
@@ -81,7 +82,7 @@ The `read_file` path must be a named, non-secret artifact supplied by the operat
 - Plugin reload, Desktop launch/rebuild, toolset changes, registry overrides, dependency installation, and fresh-session launch can mutate runtime or cache state.
 - Any tool invocation owned by a plugin inherits that tool’s approval, network, private-data, and backend boundaries.
 
-Every proposed action requires explicit approval, a verified backup of the plugin/config state, a rollback procedure, an abort condition, and post-change verification. No autonomous repair is permitted.
+Every proposed action requires explicit approval, a verified backup of the plugin/config state, a rollback procedure, an abort condition, and post-change verification. Never silently mutate plugin or runtime state or continue after an abort condition; no autonomous repair is permitted.
 
 ## Safety and approval boundaries
 

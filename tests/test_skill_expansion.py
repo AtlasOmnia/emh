@@ -122,12 +122,70 @@ def skill_body(name: str) -> str:
     return read_frontmatter(SKILLS_ROOT / name / "SKILL.md")[1]
 
 
+def _visible_markdown_lines(body: str) -> list[str]:
+    """Return non-fenced Markdown lines so code cannot manufacture contracts."""
+    visible: list[str] = []
+    in_fence = False
+    fence_char = ""
+    fence_length = 0
+    for line in body.splitlines():
+        if in_fence:
+            closing = re.fullmatch(r" {0,3}([`~]{3,})\s*", line)
+            if (
+                closing
+                and closing.group(1)[0] == fence_char
+                and len(closing.group(1)) >= fence_length
+            ):
+                in_fence = False
+            continue
+
+        opening = re.match(r"^ {0,3}([`~]{3,})(?:.*)$", line)
+        if opening:
+            in_fence = True
+            fence_char = opening.group(1)[0]
+            fence_length = len(opening.group(1))
+            continue
+        visible.append(line)
+    return visible
+
+
+def _markdown_headings(body: str) -> list[tuple[int, str]]:
+    lines = _visible_markdown_lines(body)
+    return [
+        (index, line)
+        for index, line in enumerate(lines)
+        if re.fullmatch(r"(#{1,6}) [^#\s].*", line)
+    ]
+
+
 def section(body: str, heading: str, *, level: int = 2) -> str:
     marker = f"{'#' * level} {heading}"
-    assert marker in body, f"missing section: {marker}"
-    remainder = body.split(marker, 1)[1]
-    next_heading = re.search(rf"^#{{1,{level}}} ", remainder, flags=re.MULTILINE)
-    return remainder[: next_heading.start()] if next_heading else remainder
+    lines = _visible_markdown_lines(body)
+    headings = _markdown_headings(body)
+    matches = [(index, line) for index, line in headings if line == marker]
+    assert matches, f"missing section: {marker}"
+    start, _ = matches[0]
+    end = len(lines)
+    for index, line in headings:
+        if index > start and len(line) - len(line.lstrip("#")) <= level:
+            end = index
+            break
+    return "\n".join(lines[start + 1 : end])
+
+
+def test_section_ignores_prose_and_fenced_heading_like_text():
+    body = (
+        "prose ## When to Use\n"
+        "```markdown\n"
+        "## When to Use\n"
+        "- fake content\n"
+        "```\n"
+        "## When to Use\n"
+        "real content\n"
+        "## Next\n"
+    )
+
+    assert section(body, "When to Use") == "real content"
 
 
 def read_only_allowlist(name: str) -> tuple[str, ...]:
@@ -138,22 +196,37 @@ def read_only_allowlist(name: str) -> tuple[str, ...]:
 def test_each_v02_skill_has_complete_diagnostic_safety_contract():
     for name in V02_SKILLS:
         body = skill_body(name)
-        assert all(section in body for section in REQUIRED_SECTIONS)
-        assert "Don't use for" in body
-        assert all(body.count(label) >= 1 for label in EVIDENCE_LABELS)
-        assert "current runtime and installed source outrank generic guidance" in body
-        assert "official docs are authoritative current documentation" in body
-        assert "Read-only first" in body
-        assert "explicit approval" in body
-        assert "verified backup" in body
-        assert "rollback" in body
-        assert "Never silently" in body
+        headings = _markdown_headings(body)
+        assert all(any(line == expected for _, line in headings) for expected in REQUIRED_SECTIONS)
+        overview = section(body, "Overview")
+        when_to_use = section(body, "When to Use")
+        evidence_workflow = section(body, "Evidence collection workflow")
+        safety = section(body, "Safety and approval boundaries")
+        assert "Don't use for" in when_to_use
+        assert all(label in evidence_workflow for label in EVIDENCE_LABELS)
+        assert "current runtime and installed source outrank generic guidance" in overview
+        assert "official docs are authoritative current documentation" in overview
+        assert "Read-only first" in safety
+        assert "explicit approval" in safety
+        assert "verified backup" in safety
+        assert "rollback" in safety
+        assert "Never silently" in safety
 
 
 def test_migrated_legacy_skills_have_approval_gated_action_sections():
     for name in V02_SKILLS[:6]:
-        body = skill_body(name)
-        assert re.search(r"^### Approval-gated .*", body, flags=re.MULTILINE)
+        approval = section(
+            skill_body(name), "Approval-gated reproductions and mutations", level=3
+        )
+        for phrase in (
+            "explicit approval",
+            "verified backup",
+            "rollback",
+            "abort condition",
+            "post-change verification",
+            "Never silently",
+        ):
+            assert phrase in approval
 
 
 def test_each_v02_skill_defines_bounded_escalation_packet_fields():
@@ -167,11 +240,11 @@ def test_each_v02_skill_defines_bounded_escalation_packet_fields():
         "residual question",
     )
     for name in V02_SKILLS:
-        body = skill_body(name).lower()
-        assert all(field in body for field in required_fields)
-        assert "redact" in body
-        assert "private" in body
-        assert "raw logs" in body
+        escalation = section(skill_body(name), "Escalation packet requirements").lower()
+        assert all(field in escalation for field in required_fields)
+        assert "redact" in escalation
+        assert "private" in escalation
+        assert "raw logs" in escalation
 
 
 def test_v02_triggers_counter_triggers_and_domain_layers_are_precise():
@@ -394,6 +467,7 @@ def test_v02_read_only_allowlists_are_exact_and_mutations_are_separate():
             "hermes profile list",
             "hermes profile show <profile-name>",
             "hermes profile info <profile-name>",
+            'read_file(path="<named-non-secret-memory-artifact>", offset=1, limit=200)',
         ),
         "emh-kanban-diagnostics": (
             "hermes --version",
@@ -401,7 +475,7 @@ def test_v02_read_only_allowlists_are_exact_and_mutations_are_separate():
             "hermes kanban stats",
             "hermes kanban list",
             "hermes kanban runs <task-id>",
-            "hermes kanban log <task-id>",
+            "hermes kanban log --tail 200 <task-id>",
             "hermes gateway status",
             "hermes logs gateway -n 50 --level WARNING",
         ),
@@ -412,6 +486,7 @@ def test_v02_read_only_allowlists_are_exact_and_mutations_are_separate():
             "hermes tools list --platform cli",
             "hermes logs list",
             "hermes logs --component tools -n 50 --level WARNING",
+            "hermes logs desktop -n 50 --level WARNING",
             'read_file(path="<named-non-secret-plugin-artifact>")',
         ),
         "emh-gateway-diagnostics": (
