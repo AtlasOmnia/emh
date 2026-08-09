@@ -2,6 +2,13 @@
 
 All notable changes to the local EMH distribution candidate are recorded here. This repository is MIT-licensed; changelog entries do not represent a published release.
 
+## 0.2.8 candidate — 2026-08-09
+
+### Changed
+
+- Renamed the GitHub repository's visible name from `emh` to `EMH`; canonical clone, upstream-probe, and public-safety URLs now use `AtlasOmnia/EMH`.
+- Preserved the lowercase Hermes machine identifier (`name: emh`) and all `emh-*` skill IDs for install and discovery compatibility.
+
 ## 0.2.7 candidate — 2026-08-09
 
 ### Added
@@ -18,7 +25,7 @@ All notable changes to the local EMH distribution candidate are recorded here. T
 ### Added
 
 - `emh-triage` gained the **upstream knowledge fallback**: when local evidence runs out, a read-only probe (`scripts/upstream_check.py`, stdlib-only) compares the installed distribution version against the published GitHub repo and can fetch the relevant subsystem files as labeled **upstream vX — not installed** context (Hypothesis-class). The fallback never installs, updates, git-fetches, or writes; applying an update stays a separate approved action.
-- Public-safety gate now allows the distribution's own `raw.githubusercontent.com/AtlasOmnia/emh` family.
+- Public-safety gate now allows the distribution's own `raw.githubusercontent.com/AtlasOmnia/EMH` family.
 
 ### Changed
 

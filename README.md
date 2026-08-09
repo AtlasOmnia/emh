@@ -8,7 +8,7 @@ For a plain-language introduction, see [docs/user-guide.md](docs/user-guide.md).
 
 Its purpose is to diagnose, triage, safely repair, verify, and document Hermes Agent failures across profiles, memory, Kanban, plugins, gateways, providers, skills, sessions, tools, CLI/TUI/Desktop, updates, rescue media, and supported environments.
 
-Distribution version: `0.2.7`.
+Distribution version: `0.2.8`.
 
 ## Skill inventory and version policy
 
@@ -53,7 +53,7 @@ HERMES_HOME="$TEST_HERMES_HOME" hermes profile info emh
 Clone the distribution:
 
 ```bash
-git clone https://github.com/AtlasOmnia/emh.git
+git clone https://github.com/AtlasOmnia/EMH.git
 ```
 
 Read `SOUL.md` and the installed skills before invoking the profile. No provider, model, credential, `.env`, or `config.yaml` is bundled.

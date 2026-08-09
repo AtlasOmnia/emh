@@ -224,16 +224,16 @@ def _is_official_url(url: str) -> bool:
         ) or (
             host == "github.com"
             and (
-                path == "/AtlasOmnia/emh"
-                or path == "/AtlasOmnia/emh.git"
-                or path.startswith("/AtlasOmnia/emh/")
+                path == "/AtlasOmnia/EMH"
+                or path == "/AtlasOmnia/EMH.git"
+                or path.startswith("/AtlasOmnia/EMH/")
             )
         ) or (
             host == "api.github.com"
-            and (path == "/repos/AtlasOmnia/emh" or path.startswith("/repos/AtlasOmnia/emh/"))
+            and (path == "/repos/AtlasOmnia/EMH" or path.startswith("/repos/AtlasOmnia/EMH/"))
         ) or (
             host == "raw.githubusercontent.com"
-            and path.startswith("/AtlasOmnia/emh/")
+            and path.startswith("/AtlasOmnia/EMH/")
         )
     except ValueError:
         return False
@@ -469,12 +469,12 @@ def test_scan_text_rejects_every_nonofficial_url_form_but_allows_official_famili
         "https://" + "github.com/NousResearch/hermes-agent",
         "https://" + "github.com/NousResearch/hermes-agent/releases/latest",
         "https://" + "api.github.com/repos/NousResearch/hermes-agent/releases",
-        "https://" + "github.com/AtlasOmnia/emh",
-        "https://" + "github.com/AtlasOmnia/emh.git",
-        "https://" + "github.com/AtlasOmnia/emh/releases/latest",
-        "https://" + "api.github.com/repos/AtlasOmnia/emh/releases",
-        "https://" + "raw.githubusercontent.com/AtlasOmnia/emh/main/distribution.yaml",
-        "https://" + "raw.githubusercontent.com/AtlasOmnia/emh/main/skills/emh-triage/SKILL.md",
+        "https://" + "github.com/AtlasOmnia/EMH",
+        "https://" + "github.com/AtlasOmnia/EMH.git",
+        "https://" + "github.com/AtlasOmnia/EMH/releases/latest",
+        "https://" + "api.github.com/repos/AtlasOmnia/EMH/releases",
+        "https://" + "raw.githubusercontent.com/AtlasOmnia/EMH/main/distribution.yaml",
+        "https://" + "raw.githubusercontent.com/AtlasOmnia/EMH/main/skills/emh-triage/SKILL.md",
         "https://" + "old.reddit.com/r/hermesagent/.json?limit=25",
         "https://" + "www.reddit.com/search.json?q=hermes&sort=relevance&limit=25",
         "https://" + "old.reddit.com/r/hermesagent/comments/abc123.json?limit=100",
