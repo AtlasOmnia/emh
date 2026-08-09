@@ -1,6 +1,6 @@
 name: emh
 display_name: EMH — Emergency Medical Hermes
-version: 0.2.6
+version: 0.2.7
 author: Jonathan Rivera
 license: MIT
 purpose: >-
@@ -28,3 +28,4 @@ skills:
   - emh-nightly-self-check
   - emh-orientation
   - emh-rescue-media
+  - emh-reddit-json

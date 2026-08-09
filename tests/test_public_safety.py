@@ -7,7 +7,7 @@ import stat
 import subprocess
 import sys
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, urlsplit
 
 import pytest
 import yaml
@@ -71,7 +71,15 @@ EXPECTED_SKILL_VERSIONS = {
     "emh-nightly-self-check": "0.2.0",
     "emh-orientation": "0.2.0",
     "emh-rescue-media": "0.2.0",
+    "emh-reddit-json": "0.2.0",
 }
+
+_REDDIT_JSON_PATH = re.compile(
+    r"^/(?:search\.json|r/[A-Za-z0-9_-]+(?:/\.json|/search\.json|/comments/[A-Za-z0-9_-]+\.json|/about/rules\.json))$"
+)
+_REDDIT_QUERY_KEYS = frozenset(
+    {"after", "before", "count", "limit", "q", "restrict_sr", "sort", "t"}
+)
 
 
 _CREDENTIAL_SHAPE_PATTERN = re.compile(
@@ -191,10 +199,19 @@ def _is_official_url(url: str) -> bool:
         parsed = urlsplit(url)
         if parsed.scheme.lower() != "https" or parsed.username or parsed.password:
             return False
-        if parsed.query or parsed.fragment or parsed.port is not None:
+        if parsed.fragment or parsed.port is not None:
             return False
         host = (parsed.hostname or "").lower()
         path = parsed.path.rstrip("/")
+        if host in {"old.reddit.com", "www.reddit.com"}:
+            if not _REDDIT_JSON_PATH.fullmatch(path):
+                return False
+            return all(
+                key.lower() in _REDDIT_QUERY_KEYS
+                for key, _ in parse_qsl(parsed.query, keep_blank_values=True)
+            )
+        if parsed.query:
+            return False
         return (
             host == "hermes-agent.nousresearch.com"
             and (path == "/docs" or path.startswith("/docs/"))
@@ -458,6 +475,10 @@ def test_scan_text_rejects_every_nonofficial_url_form_but_allows_official_famili
         "https://" + "api.github.com/repos/AtlasOmnia/emh/releases",
         "https://" + "raw.githubusercontent.com/AtlasOmnia/emh/main/distribution.yaml",
         "https://" + "raw.githubusercontent.com/AtlasOmnia/emh/main/skills/emh-triage/SKILL.md",
+        "https://" + "old.reddit.com/r/hermesagent/.json?limit=25",
+        "https://" + "www.reddit.com/search.json?q=hermes&sort=relevance&limit=25",
+        "https://" + "old.reddit.com/r/hermesagent/comments/abc123.json?limit=100",
+        "https://" + "old.reddit.com/r/hermesagent/about/rules.json",
     ]
     nonofficial = [
         "http://" + "example.com/public",
@@ -471,6 +492,9 @@ def test_scan_text_rejects_every_nonofficial_url_form_but_allows_official_famili
         "https://" + "192.168.1.20/private",
         "https://" + "[fd00::1]/private",
         "https://" + "hermes-agent.nousresearch.com/docsevil",
+        "https://" + "old.reddit.com/r/hermesagent/.json?" + "to" + "ken=value",
+        "https://" + "old.reddit.com/r/hermesagent/.json#fragment",
+        "https://" + "old.reddit.com/r/hermesagent/about/rules",
     ]
 
     assert scan_text("official.md", "\n".join(official)) == []

@@ -2,6 +2,17 @@
 
 All notable changes to the local EMH distribution candidate are recorded here. This repository is MIT-licensed; changelog entries do not represent a published release.
 
+## 0.2.7 candidate — 2026-08-09
+
+### Added
+
+- Added `emh-reddit-json` (0.2.0), a read-only public Reddit JSON workflow modeled on Donna's proven reading path: bounded listing/search/thread/comment/rules endpoints, `old.reddit.com` and browser fallback guidance, JSON-shape handling, evidence labels, redaction, and explicit exclusion of OAuth, cookies, posting, voting, moderation, and anti-bot bypasses.
+- Public-safety URL validation now admits only the bounded public JSON endpoint families used by `emh-reddit-json`, with a restricted query-key allowlist.
+
+### Changed
+
+- Distribution inventory advanced to sixteen class-level skills (fourteen at 0.2.0, two untouched at 0.1.0); manifest and README updated to `0.2.7`.
+
 ## 0.2.6 candidate — 2026-08-08
 
 ### Added

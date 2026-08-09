@@ -22,6 +22,7 @@ EXPECTED_VERSIONS = {
     "emh-nightly-self-check": "0.2.0",
     "emh-orientation": "0.2.0",
     "emh-rescue-media": "0.2.0",
+    "emh-reddit-json": "0.2.0",
 }
 
 
@@ -59,6 +60,7 @@ def test_exact_skill_inventory_and_intentional_mixed_versions():
         "emh-nightly-self-check",
         "emh-orientation",
         "emh-rescue-media",
+        "emh-reddit-json",
     ))
 
 
@@ -104,6 +106,7 @@ V02_SKILLS = (
     "emh-nightly-self-check",
     "emh-orientation",
     "emh-rescue-media",
+    "emh-reddit-json",
 )
 REQUIRED_SECTIONS = (
     "## Overview",
@@ -328,6 +331,24 @@ def test_v02_triggers_counter_triggers_and_domain_layers_are_precise():
             "post-update verification",
             "source_status.py --offline",
         ),
+        "emh-reddit-json": (
+            "reddit",
+            "json",
+            "public",
+            "listing",
+            "search",
+            "thread",
+            "comment",
+            "rules",
+            "old.reddit.com",
+            "www.reddit.com",
+            "after",
+            "data.children",
+            "browser_navigate",
+            "browser_console",
+            "anti-bot",
+            "community evidence",
+        ),
         "emh-memory-diagnostics": (
             "memory",
             "profile-scoped",
@@ -523,6 +544,15 @@ def test_v02_read_only_allowlists_are_exact_and_mutations_are_separate():
             "hermes tools list --platform cli",
             'read_file(path="<named-non-secret-skill-artifact>")',
         ),
+        "emh-reddit-json": (
+            'terminal(command="curl -sS --show-error --max-time 20 -A emh-public-json/0.2 https://old.reddit.com/r/SUBREDDIT/.json?limit=25")',
+            'terminal(command="curl -sS --show-error --max-time 20 -A emh-public-json/0.2 https://www.reddit.com/search.json?q=QUERY&sort=relevance&limit=25")',
+            'terminal(command="curl -sS --show-error --max-time 20 -A emh-public-json/0.2 https://old.reddit.com/r/SUBREDDIT/comments/POST_ID.json?limit=100")',
+            'terminal(command="curl -sS --show-error --max-time 20 -A emh-public-json/0.2 https://old.reddit.com/r/SUBREDDIT/about/rules.json")',
+            'browser_navigate(url="https://old.reddit.com/r/SUBREDDIT/.json?limit=25")',
+            'browser_console(expression="JSON.parse(document.body.innerText)")',
+            'browser_console(expression="JSON.parse(document.body.innerText).data.children.slice(0,25)")',
+        ),
     }
 
     for name, commands in expected.items():
@@ -546,6 +576,7 @@ def test_v02_escalation_packets_add_domain_specific_classification():
         "emh-tool-runtime-diagnostics": "Pipeline classification",
         "emh-environment-diagnostics": "Cross-platform matrix",
         "emh-update-recovery": "Recovery readiness",
+        "emh-reddit-json": "Reddit evidence",
     }
     for name, field in expected.items():
         escalation = section(skill_body(name), "Escalation packet requirements")
