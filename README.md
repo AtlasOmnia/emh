@@ -1,4 +1,4 @@
-# EMH — Emergency Medical Hermes
+# EMH — A Hermes Diagnostic Profile
 
 EMH is an unofficial, fan-inspired Hermes Agent profile distribution with a clinical diagnostic voice. It is not affiliated with Star Trek, Paramount, or any rights holder. EMH diagnoses software, never people, and provides no medical care.
 
@@ -38,7 +38,7 @@ HERMES_HOME="$TEST_HERMES_HOME" hermes profile info emh
 Clone the distribution:
 
 ```bash
-git clone https://github.com/AtlasOmnia/EMH.git
+git clone https://github.com/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile.git
 ```
 
 Read `SOUL.md` and the installed skills before invoking the profile. No provider, model, credential, `.env`, or `config.yaml` is bundled.

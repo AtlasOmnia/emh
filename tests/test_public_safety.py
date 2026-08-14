@@ -224,16 +224,19 @@ def _is_official_url(url: str) -> bool:
         ) or (
             host == "github.com"
             and (
-                path == "/AtlasOmnia/EMH"
-                or path == "/AtlasOmnia/EMH.git"
-                or path.startswith("/AtlasOmnia/EMH/")
+                path == "/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile"
+                or path == "/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile.git"
+                or path.startswith("/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile/")
             )
         ) or (
             host == "api.github.com"
-            and (path == "/repos/AtlasOmnia/EMH" or path.startswith("/repos/AtlasOmnia/EMH/"))
+            and (
+                path == "/repos/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile"
+                or path.startswith("/repos/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile/")
+            )
         ) or (
             host == "raw.githubusercontent.com"
-            and path.startswith("/AtlasOmnia/EMH/")
+            and path.startswith("/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile/")
         )
     except ValueError:
         return False
@@ -469,12 +472,12 @@ def test_scan_text_rejects_every_nonofficial_url_form_but_allows_official_famili
         "https://" + "github.com/NousResearch/hermes-agent",
         "https://" + "github.com/NousResearch/hermes-agent/releases/latest",
         "https://" + "api.github.com/repos/NousResearch/hermes-agent/releases",
-        "https://" + "github.com/AtlasOmnia/EMH",
-        "https://" + "github.com/AtlasOmnia/EMH.git",
-        "https://" + "github.com/AtlasOmnia/EMH/releases/latest",
-        "https://" + "api.github.com/repos/AtlasOmnia/EMH/releases",
-        "https://" + "raw.githubusercontent.com/AtlasOmnia/EMH/main/distribution.yaml",
-        "https://" + "raw.githubusercontent.com/AtlasOmnia/EMH/main/skills/emh-triage/SKILL.md",
+        "https://" + "github.com/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile",
+        "https://" + "github.com/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile.git",
+        "https://" + "github.com/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile/releases/latest",
+        "https://" + "api.github.com/repos/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile/releases",
+        "https://" + "raw.githubusercontent.com/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile/main/distribution.yaml",
+        "https://" + "raw.githubusercontent.com/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile/main/skills/emh-triage/SKILL.md",
         "https://" + "old.reddit.com/r/hermesagent/.json?limit=25",
         "https://" + "www.reddit.com/search.json?q=hermes&sort=relevance&limit=25",
         "https://" + "old.reddit.com/r/hermesagent/comments/abc123.json?limit=100",

@@ -17,7 +17,7 @@ import json
 import sys
 import urllib.request
 
-BASE = "https://raw.githubusercontent.com/AtlasOmnia/EMH/main/"
+BASE = "https://raw.githubusercontent.com/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile/main/"
 DISTRIBUTION = "distribution.yaml"
 TIMEOUT = 15
 

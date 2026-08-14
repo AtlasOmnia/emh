@@ -8,6 +8,10 @@ These are the public weekly release notes for EMH. The newest entries are public
 
 - Keep unreleased changes here until the weekly release-note cut; retain the full historical record below.
 
+### Changed
+
+- Corrected the public repository name and canonical source URLs to `AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile`; historical release-note prose retains the former locator where it describes prior repository state.
+
 ## 0.2.9 — 2026-08-14
 
 ### Changed

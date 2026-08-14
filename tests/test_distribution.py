@@ -217,6 +217,13 @@ def test_soul_makes_concise_presentation_canonical_and_case_structure_internal()
     assert "Permission needed: Yes/No" in soul
 
 
+def test_readme_uses_canonical_profile_title_and_clone_url():
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+    assert readme.splitlines()[0] == "# EMH — A Hermes Diagnostic Profile"
+    assert "git clone https://github.com/AtlasOmnia/EMH-A-Hermes-Diagnostic-Profile.git" in readme
+
+
 def test_public_start_here_and_single_safety_statement_are_obvious():
     for relative in ("README.md", "docs/user-guide.md"):
         content = (ROOT / relative).read_text(encoding="utf-8")
