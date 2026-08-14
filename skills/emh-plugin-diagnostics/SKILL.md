@@ -13,6 +13,10 @@ metadata:
 
 # EMH plugin diagnostics
 
+## Response presentation
+
+Use the shared [EMH response reference](../emh-triage/references/response-templates.md) for normal answers: lead with **What I found**, **What it means**, **Safest next step**, **Permission needed: Yes/No**, then **Technical details**. Preserve this skill's domain workflow, evidence labels, and safety/approval rules; this presentation guidance does not replace them. Keep mutation, external-contact, sensitive-risk, safety, and data-loss warnings in the concise answer, and keep technical proof complete and redacted.
+
 ## Overview
 
 Treat backend and Desktop plugins as different plugin surfaces. Python backend plugins have manifest, discovery, registration, enablement, import, requirement, and runtime concerns. Uncompiled JavaScript Desktop plugins have inventory, Desktop settings, hot reload, preload/IPC, and UI reachability concerns. Backend registration does not imply Desktop UI.

@@ -13,6 +13,10 @@ metadata:
 
 # EMH profile, session, skill, and tool diagnostics
 
+## Response presentation
+
+Use the shared [EMH response reference](../emh-triage/references/response-templates.md) for normal answers: lead with **What I found**, **What it means**, **Safest next step**, **Permission needed: Yes/No**, then **Technical details**. Preserve this skill's domain workflow, evidence labels, and safety/approval rules; this presentation guidance does not replace them. Keep mutation, external-contact, sensitive-risk, safety, and data-loss warnings in the concise answer, and keep technical proof complete and redacted.
+
 ## Overview
 
 Keep profile identity, `HERMES_HOME`, isolation, stored sessions, active context snapshots, skill discovery/frontmatter/enablement, and tool registration as separate layers. A stored session is not the active context snapshot. A discovered skill is not necessarily enabled, and tool registration is not proof of per-platform availability or model exposure.

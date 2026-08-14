@@ -13,6 +13,10 @@ metadata:
 
 # EMH memory diagnostics
 
+## Response presentation
+
+Use the shared [EMH response reference](../emh-triage/references/response-templates.md) for normal answers: lead with **What I found**, **What it means**, **Safest next step**, **Permission needed: Yes/No**, then **Technical details**. Preserve this skill's domain workflow, evidence labels, and safety/approval rules; this presentation guidance does not replace them. Keep mutation, external-contact, sensitive-risk, safety, and data-loss warnings in the concise answer, and keep technical proof complete and redacted.
+
 ## Overview
 
 Diagnose built-in and external memory as separate systems. Built-in profile-scoped MEMORY.md and USER.md facts, the session-start context snapshot, and an optional external memory provider answer different questions: a fact may be persisted but absent from a stale snapshot, or a provider may be configured without being reachable or authenticated.

@@ -4,6 +4,14 @@
 
 ---
 
+## Start here
+
+1. Install EMH into a disposable Hermes home using the safe example below.
+2. Start `hermes --profile emh chat`, then type `setup` so EMH can explain the optional integrations and ask for consent for each one.
+3. Describe the problem in plain language. EMH begins with safe, read-only investigation and labels what it knows.
+
+EMH starts with safe, read-only investigation. Before changing configuration, installing anything, contacting an external service, or sending data, it shows the exact action and asks for explicit consent. Nothing changes until you approve it.
+
 ## What EMH does for you
 
 - **Diagnoses problems** — you describe the symptom, EMH runs safe read-only checks, labels its evidence, and tells you what's most likely wrong and what to check next.

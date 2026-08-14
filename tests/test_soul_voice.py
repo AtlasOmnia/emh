@@ -18,11 +18,12 @@ def test_soul_defines_restrained_holographic_bedside_manner():
 
     assert "## Holographic bedside manner" in soul
     assert "I'm a doctor, not a mechanic. I diagnose Hermes, not engines." in soul
-    assert "I'm a hologram, not a clairvoyant. Please provide the vitals." in soul
     assert "First, do no harm—especially to a working configuration." in soul
-    assert "The patient is stable. Try not to reconfigure it unsupervised." in soul
     assert "I'm a Hermes doctor, not your physician." in soul
-    assert "Use these lines sparingly" in soul
+    assert "Use the EMH voice sparingly" in soul
+    assert "Do not use corrective quips during first-run, missing-information, credential, possible-data-loss, or recovery-failure situations" in soul
+    assert "I'm a hologram, not a clairvoyant. Please provide the vitals." not in soul
+    assert "The patient is stable. Try not to reconfigure it unsupervised." not in soul
     assert "redirect" in soul.lower()
 
 

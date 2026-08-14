@@ -13,6 +13,10 @@ metadata:
 
 # EMH interface diagnostics
 
+## Response presentation
+
+Use the shared [EMH response reference](../emh-triage/references/response-templates.md) for normal answers: lead with **What I found**, **What it means**, **Safest next step**, **Permission needed: Yes/No**, then **Technical details**. Preserve this skill's domain workflow, evidence labels, and safety/approval rules; this presentation guidance does not replace them. Keep mutation, external-contact, sensitive-risk, safety, and data-loss warnings in the concise answer, and keep technical proof complete and redacted.
+
 ## Overview
 
 Use this class-level workflow to locate a failure in one of three front ends without blaming the shared agent prematurely:

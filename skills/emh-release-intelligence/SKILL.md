@@ -9,6 +9,10 @@ platforms: [linux, macos, windows]
 
 # EMH release intelligence
 
+## Response presentation
+
+Use the shared [EMH response reference](../emh-triage/references/response-templates.md) for normal answers: lead with **What I found**, **What it means**, **Safest next step**, **Permission needed: Yes/No**, then **Technical details**. Preserve this skill's domain workflow, evidence labels, and safety/approval rules; this presentation guidance does not replace them. Keep mutation, external-contact, sensitive-risk, safety, and data-loss warnings in the concise answer, and keep technical proof complete and redacted.
+
 Use `skills/emh-release-intelligence/scripts/source_status.py` to summarize installed version, path/method, Git commit/clean state, and official latest-release metadata. This is evidence gathering, not an update mechanism.
 
 ## Workflow

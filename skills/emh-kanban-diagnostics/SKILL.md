@@ -13,6 +13,10 @@ metadata:
 
 # EMH Kanban diagnostics
 
+## Response presentation
+
+Use the shared [EMH response reference](../emh-triage/references/response-templates.md) for normal answers: lead with **What I found**, **What it means**, **Safest next step**, **Permission needed: Yes/No**, then **Technical details**. Preserve this skill's domain workflow, evidence labels, and safety/approval rules; this presentation guidance does not replace them. Keep mutation, external-contact, sensitive-risk, safety, and data-loss warnings in the concise answer, and keep technical proof complete and redacted.
+
 ## Overview
 
 Separate queue and board state from dispatcher/gateway state and from worker spawn, run, heartbeat, and log state. A task can be queued while the dispatcher is healthy, claimed while no worker is running, or completed while a stale log remains. Keep board, assignee, workspace, profile, task, and run identifiers scoped and redacted.

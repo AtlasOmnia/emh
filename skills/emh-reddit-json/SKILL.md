@@ -13,6 +13,10 @@ metadata:
 
 # EMH Reddit JSON reader
 
+## Response presentation
+
+Use the shared [EMH response reference](../emh-triage/references/response-templates.md) for normal answers: lead with **What I found**, **What it means**, **Safest next step**, **Permission needed: Yes/No**, then **Technical details**. Preserve this skill's domain workflow, evidence labels, and safety/approval rules; this presentation guidance does not replace them. Keep mutation, external-contact, sensitive-risk, safety, and data-loss warnings in the concise answer, and keep technical proof complete and redacted.
+
 ## Overview
 
 Use this skill to collect public Reddit listings, searches, threads, comments, and subreddit rules as bounded JSON evidence. The current runtime and installed source outrank generic guidance; official docs are authoritative current documentation for Hermes behavior. Reddit content is community evidence, not official Hermes evidence, and must remain labeled accordingly.

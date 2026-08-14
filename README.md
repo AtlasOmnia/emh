@@ -8,30 +8,15 @@ For a plain-language introduction, see [docs/user-guide.md](docs/user-guide.md).
 
 Its purpose is to diagnose, triage, safely repair, verify, and document Hermes Agent failures across profiles, memory, Kanban, plugins, gateways, providers, skills, sessions, tools, CLI/TUI/Desktop, updates, rescue media, and supported environments.
 
-Distribution version: `0.2.8`.
+Distribution version: `0.2.9`.
 
-## Skill inventory and version policy
+## Start here
 
-The distribution contains exactly sixteen class-level skills. Two untouched v0.1 skills remain at `0.1.0`; fourteen v0.2 skills are `0.2.0`. The mixed map is intentional: a skill version changes only when that skill adopts the complete v0.2 workflow and safety contract.
+1. Install EMH into a disposable Hermes home using the safe example below.
+2. Start `hermes --profile emh chat`, then type `setup` so EMH can explain the optional integrations and ask for consent for each one.
+3. Describe the problem in plain language. EMH begins with safe, read-only investigation and labels what it knows.
 
-| Skill | Version | Scope |
-| --- | --- | --- |
-| `emh-triage` | `0.1.0` | Unknown or mixed Hermes failures and case routing |
-| `emh-memory-diagnostics` | `0.2.0` | Built-in and external memory behavior |
-| `emh-kanban-diagnostics` | `0.2.0` | Queue, dispatcher, worker, and run state |
-| `emh-plugin-diagnostics` | `0.2.0` | Backend and Desktop plugin boundaries |
-| `emh-gateway-diagnostics` | `0.2.0` | Messaging gateway and delivery paths |
-| `emh-provider-diagnostics` | `0.2.0` | Provider, model, endpoint, and fallback state |
-| `emh-profile-session-skill-diagnostics` | `0.2.0` | Profile, session, skill discovery, and context |
-| `emh-release-intelligence` | `0.1.0` | Read-only installed-versus-official release comparison |
-| `emh-interface-diagnostics` | `0.2.0` | Classic CLI, TUI, and Desktop interface layers |
-| `emh-tool-runtime-diagnostics` | `0.2.0` | Tool discovery through result shaping |
-| `emh-environment-diagnostics` | `0.2.0` | Host/platform and execution-backend separation |
-| `emh-update-recovery` | `0.2.0` | Update readiness, failure classification, and rollback planning |
-| `emh-nightly-self-check` | `0.2.0` | Recurring read-only nightly health sweep (core, sessions, retention, memory, storage, cron fleet) |
-| `emh-orientation` | `0.2.0` | First-run consent flow: nightly health cron and repo update-check on the default profile |
-| `emh-rescue-media` | `0.2.0` | Build/refresh/deploy USB rescue media: redacted baseline, stdlib-only break-glass collector, encrypted patient snapshot, narrowest-repair recovery |
-| `emh-reddit-json` | `0.2.0` | Read-only public Reddit listings, searches, threads, comments, and rules as bounded JSON evidence |
+EMH starts with safe, read-only investigation. Before changing configuration, installing anything, contacting an external service, or sending data, it shows the exact action and asks for explicit consent. Nothing changes until you approve it.
 
 ## Safety and scope
 
@@ -116,6 +101,31 @@ For a live profile, review the delete confirmation and preserve backups before a
 ## Source policy
 
 Official documentation is authoritative: https://hermes-agent.nousresearch.com/docs. The concise source index and retrieval ledger live under `skills/emh-triage/references/`. They separate officially documented behavior from EMH recommendations and warn when docs may be newer than the installed runtime.
+
+## Technical reference
+
+### Skill inventory and version policy
+
+The distribution contains exactly sixteen class-level skills. Two untouched v0.1 skills remain at `0.1.0`; fourteen v0.2 skills are `0.2.0`. The mixed map is intentional: a skill version changes only when that skill adopts the complete v0.2 workflow and safety contract.
+
+| Skill | Version | Scope |
+| --- | --- | --- |
+| `emh-triage` | `0.1.0` | Unknown or mixed Hermes failures and case routing |
+| `emh-memory-diagnostics` | `0.2.0` | Built-in and external memory behavior |
+| `emh-kanban-diagnostics` | `0.2.0` | Queue, dispatcher, worker, and run state |
+| `emh-plugin-diagnostics` | `0.2.0` | Backend and Desktop plugin boundaries |
+| `emh-gateway-diagnostics` | `0.2.0` | Messaging gateway and delivery paths |
+| `emh-provider-diagnostics` | `0.2.0` | Provider, model, endpoint, and fallback state |
+| `emh-profile-session-skill-diagnostics` | `0.2.0` | Profile, session, skill discovery, and context |
+| `emh-release-intelligence` | `0.1.0` | Read-only installed-versus-official release comparison |
+| `emh-interface-diagnostics` | `0.2.0` | Classic CLI, TUI, and Desktop interface layers |
+| `emh-tool-runtime-diagnostics` | `0.2.0` | Tool discovery through result shaping |
+| `emh-environment-diagnostics` | `0.2.0` | Host/platform and execution-backend separation |
+| `emh-update-recovery` | `0.2.0` | Update readiness, failure classification, and rollback planning |
+| `emh-nightly-self-check` | `0.2.0` | Recurring read-only nightly health sweep (core, sessions, retention, memory, storage, cron fleet) |
+| `emh-orientation` | `0.2.0` | First-run consent flow: nightly health cron and repo update-check on the default profile |
+| `emh-rescue-media` | `0.2.0` | Build/refresh/deploy USB rescue media: redacted baseline, stdlib-only break-glass collector, encrypted patient snapshot, narrowest-repair recovery |
+| `emh-reddit-json` | `0.2.0` | Read-only public Reddit listings, searches, threads, comments, and rules as bounded JSON evidence |
 
 ## License
 

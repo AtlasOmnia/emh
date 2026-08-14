@@ -13,6 +13,10 @@ metadata:
 
 # EMH provider diagnostics
 
+## Response presentation
+
+Use the shared [EMH response reference](../emh-triage/references/response-templates.md) for normal answers: lead with **What I found**, **What it means**, **Safest next step**, **Permission needed: Yes/No**, then **Technical details**. Preserve this skill's domain workflow, evidence labels, and safety/approval rules; this presentation guidance does not replace them. Keep mutation, external-contact, sensitive-risk, safety, and data-loss warnings in the concise answer, and keep technical proof complete and redacted.
+
 ## Overview
 
 Report provider state as separate facts: configured, reachable, authenticated, requested model available, capable of the requested context, and selected in fallback order. Also distinguish runtime detection, rate limits, endpoint identity, and local endpoint privacy. A configured provider is not necessarily authenticated, and a reachable endpoint is not proof that the requested model can serve the request.

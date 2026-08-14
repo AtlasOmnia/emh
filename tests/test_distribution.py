@@ -50,6 +50,7 @@ REQUIRED_REFERENCES = (
     "skills/emh-triage/references/safety-and-redaction.md",
     "skills/emh-triage/references/subsystem-map.md",
 )
+RESPONSE_REFERENCE = "skills/emh-triage/references/response-templates.md"
 REQUIRED_SECTIONS = ("## Workflow", "## Safety boundaries", "## Pitfalls", "## Verification")
 CASE_LABELS = (
     "Complaint",
@@ -74,7 +75,7 @@ def test_manifest_has_required_metadata_and_owned_paths():
     manifest = yaml.safe_load((ROOT / "distribution.yaml").read_text(encoding="utf-8"))
 
     assert manifest["name"] == "emh"
-    assert manifest["version"] == "0.2.8"
+    assert manifest["version"] == "0.2.9"
     assert manifest["author"] == "Jonathan Rivera"
     assert manifest["license"] == "MIT"
     assert manifest["hermes_requires"] == ">=0.14.0"
@@ -116,7 +117,7 @@ def test_installed_distribution_loader_validates_manifest_and_version_requiremen
 
     assert manifest is not None
     assert manifest.name == "emh"
-    assert manifest.version == "0.2.8"
+    assert manifest.version == "0.2.9"
     assert manifest.hermes_requires == ">=0.14.0"
     assert manifest.distribution_owned == ["SOUL.md", "skills", "skins"]
     check_hermes_requires(manifest.hermes_requires, "0.20.0")
@@ -160,8 +161,89 @@ def _has_markdown_heading(body: str, expected: str) -> bool:
 
 
 def test_required_portable_skills_and_references_exist():
-    for path in [*(ROOT / relative for relative in REQUIRED_SKILLS.values()), *(ROOT / relative for relative in REQUIRED_REFERENCES)]:
+    for path in [
+        *(ROOT / relative for relative in REQUIRED_SKILLS.values()),
+        *(ROOT / relative for relative in REQUIRED_REFERENCES),
+        ROOT / RESPONSE_REFERENCE,
+    ]:
         assert path.is_file(), f"required distribution content is missing: {path.relative_to(ROOT)}"
+
+
+def test_shared_response_reference_preserves_concise_order_and_safety_proof():
+    reference = (ROOT / RESPONSE_REFERENCE).read_text(encoding="utf-8")
+    headings = [
+        "## What I found",
+        "## What it means",
+        "## Safest next step",
+        "## Permission needed: Yes/No",
+        "## Technical details",
+    ]
+    positions = [reference.index(heading) for heading in headings]
+    assert positions == sorted(positions)
+    for phrase in (
+        "evidence labels",
+        "citations",
+        "commands and exit status",
+        "version/profile scope",
+        "stage classification",
+        "IDs, timestamps, and errors",
+        "uncertainty and falsification",
+        "redacted escalation support data",
+        "never hidden below details",
+        "exact, target-specific, and just-in-time",
+        "raw secrets",
+        "raw logs",
+        "private identifiers",
+        "calm and non-blaming",
+        "corrective quips",
+    ):
+        assert phrase.lower() in reference.lower()
+    for template in (
+        "Intake",
+        "Check in progress",
+        "Diagnosis found",
+        "More evidence needed",
+        "Approval request",
+        "Escalation/support packet",
+    ):
+        assert template in reference
+
+
+def test_soul_makes_concise_presentation_canonical_and_case_structure_internal():
+    soul = (ROOT / "SOUL.md").read_text(encoding="utf-8")
+    assert "response-templates.md" in soul
+    assert "internal/support-detail structure" in soul
+    assert "every normal answer follows the concise response order" in soul
+    assert "Permission needed: Yes/No" in soul
+
+
+def test_public_start_here_and_single_safety_statement_are_obvious():
+    for relative in ("README.md", "docs/user-guide.md"):
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        start = content.index("## Start here")
+        reference = content.index("## ", start + len("## Start here"))
+        start_block = content[start:reference]
+        assert "1." in start_block
+        assert "install" in start_block.lower()
+        assert "start" in start_block.lower()
+        assert "setup" in start_block.lower()
+        assert "describe the problem" in start_block.lower()
+        assert "consent" in start_block.lower()
+        assert "read-only" in start_block.lower()
+        assert "before changing configuration, installing anything, contacting an external service, or sending data, it shows the exact action and asks" in content.lower()
+
+
+def test_public_version_and_weekly_changelog_contract():
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    manifest = yaml.safe_load((ROOT / "distribution.yaml").read_text(encoding="utf-8"))
+    changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert manifest["version"] == "0.2.9"
+    assert "distribution version: `0.2.9`" in readme.lower()
+    assert "newest entries are public release notes" in changelog.lower()
+    assert "weekly" in changelog.lower()
+    assert "unreleased" in changelog.lower()
+    assert "## 0.2.9" in changelog
+    assert "concise" in changelog.lower()
 
 
 def test_all_portable_skills_have_public_contract_frontmatter_and_sections():
@@ -200,7 +282,7 @@ def test_readme_documents_exact_inventory_and_mixed_version_policy():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     lower = readme.lower()
 
-    assert "distribution version: `0.2.8`" in lower
+    assert "distribution version: `0.2.9`" in lower
     assert all(f"`{name}`" in readme for name in REQUIRED_SKILLS)
     assert "untouched v0.1 skills remain at `0.1.0`" in lower
     assert "fourteen v0.2 skills are `0.2.0`" in lower

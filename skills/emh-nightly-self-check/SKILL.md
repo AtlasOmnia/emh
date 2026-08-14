@@ -13,6 +13,10 @@ metadata:
 
 # EMH nightly self-check
 
+## Response presentation
+
+Use the shared [EMH response reference](../emh-triage/references/response-templates.md) for normal answers: lead with **What I found**, **What it means**, **Safest next step**, **Permission needed: Yes/No**, then **Technical details**. Preserve this skill's domain workflow, evidence labels, and safety/approval rules; this presentation guidance does not replace them. Keep mutation, external-contact, sensitive-risk, safety, and data-loss warnings in the concise answer, and keep technical proof complete and redacted.
+
 ## Overview
 
 The nightly self-check is a bounded, read-only health sweep over the major Hermes persistence and runtime surfaces: core health, session lifecycle, retention, memory, storage, and the cron fleet. It runs on a schedule (canonical deployment: daily at 03:00) and either confirms health or reports a short, evidence-labeled anomaly list.

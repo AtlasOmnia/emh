@@ -13,6 +13,10 @@ metadata:
 
 # EMH update recovery
 
+## Response presentation
+
+Use the shared [EMH response reference](../emh-triage/references/response-templates.md) for normal answers: lead with **What I found**, **What it means**, **Safest next step**, **Permission needed: Yes/No**, then **Technical details**. Preserve this skill's domain workflow, evidence labels, and safety/approval rules; this presentation guidance does not replace them. Keep mutation, external-contact, sensitive-risk, safety, and data-loss warnings in the concise answer, and keep technical proof complete and redacted.
+
 ## Overview
 
 This skill assesses and classifies update state; it does not authorize an update. Keep `emh-release-intelligence` read-only and use its offline script before any network or mutation.

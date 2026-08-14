@@ -134,6 +134,19 @@ def skill_body(name: str) -> str:
     return read_frontmatter(SKILLS_ROOT / name / "SKILL.md")[1]
 
 
+def test_every_skill_adopts_the_shared_concise_response_reference():
+    for path in sorted(SKILLS_ROOT.glob("*/SKILL.md")):
+        body = read_frontmatter(path)[1]
+        assert "## Response presentation" in body, path
+        assert "references/response-templates.md" in body, path
+        assert "What I found" in body, path
+        assert "What it means" in body, path
+        assert "Safest next step" in body, path
+        assert "Permission needed: Yes/No" in body, path
+        assert "Technical details" in body, path
+        assert "domain workflow, evidence labels, and safety/approval rules" in body, path
+
+
 def _visible_markdown_lines(body: str) -> list[str]:
     """Return non-fenced Markdown lines so code cannot manufacture contracts."""
     visible: list[str] = []

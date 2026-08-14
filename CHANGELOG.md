@@ -1,6 +1,20 @@
 # Changelog
 
-All notable changes to the local EMH distribution candidate are recorded here. This repository is MIT-licensed; changelog entries do not represent a published release.
+These are the public weekly release notes for EMH. The newest entries are public release notes for the current candidate. New work is collected under `Unreleased`; at the weekly cut, move completed entries into the next dated version heading. This history is preserved, and a release-note entry does not itself publish, install, or activate anything.
+
+## Unreleased
+
+### Convention
+
+- Keep unreleased changes here until the weekly release-note cut; retain the full historical record below.
+
+## 0.2.9 — 2026-08-14
+
+### Changed
+
+- Made the concise response order canonical across EMH: **What I found**, **What it means**, **Safest next step**, **Permission needed: Yes/No**, then **Technical details**.
+- Kept the seven-stage clinical case structure as internal/support detail, while keeping safety, evidence, redaction, and approval rules primary.
+- Added an obvious public Start here path and consistent safe-read-only, ask-before-change guidance to the README and user guide.
 
 ## 0.2.8 candidate — 2026-08-09
 
