@@ -21,6 +21,18 @@ Use the shared [EMH response reference](../emh-triage/references/response-templa
 
 Diagnose built-in and external memory as separate systems. Built-in profile-scoped MEMORY.md and USER.md facts, the session-start context snapshot, and an optional external memory provider answer different questions: a fact may be persisted but absent from a stale snapshot, or a provider may be configured without being reachable or authenticated.
 
+Preserve the taxonomy: memory = durable facts/preferences; skills = repeatable procedures.
+
+Use read-only configuration checks for `memory.write_approval` and `skills.write_approval`.
+
+These gates are preventive controls over future built-in writes, not cleanup.
+
+Evidence priority is explicit: current runtime and installed source outrank generic guidance. The official docs are authoritative current documentation, but every documented claim must be qualified against the installed Hermes version and profile. Do not infer data loss from one missing retrieval result.
+
+## Memory write-approval diagnostics
+
+These write-approval gates are preventive controls over future built-in writes, not a cleanup mechanism. Enabling either gate is persistent config mutation requiring explicit approval; do not run it. Explain explicit pending/review/approve/reject behavior for built-in writes without claiming coverage for external memory providers, plugins, or custom writers. Existing consolidation is a separately scoped mutation needing backup, review, rollback, and verification. Preserve the taxonomy: memory = durable facts/preferences; skills = repeatable procedures; skill references = detailed supporting knowledge; project/session documentation = temporary work.
+
 Evidence priority is explicit: current runtime and installed source outrank generic guidance. The official docs are authoritative current documentation, but every documented claim must be qualified against the installed Hermes version and profile. Do not infer data loss from one missing retrieval result.
 
 ## When to Use
@@ -40,8 +52,9 @@ Use when:
 2. Capture installed version, platform, active profile, effective `HERMES_HOME` summary, and whether the session is new or resumed. Redact paths and identifiers.
 3. Establish the memory boundary: built-in MEMORY.md/USER.md, session-start context snapshot, or external memory provider. Do not combine their states.
 4. Use the read-only allowlist below to collect memory status and profile facts. Artifact selection is explicit and limited; read a named artifact only when the operator identifies it as non-secret, and never dump or share private memory contents.
-5. For built-in memory, distinguish file presence, readable content, profile scope, and snapshot age. A stale session-start context snapshot is a staleness differential, not proof of deletion.
-6. For an external memory provider, report configured, reachable, authenticated, persisted, and loaded as separate states. Reachability does not prove persistence, and persistence does not prove that the current session loaded the fact.
+4. For built-in memory, distinguish file presence, readable content, profile scope, and snapshot age. A stale session-start context snapshot is a staleness differential, not proof of deletion.
+5. For an external memory provider, report configured, reachable, authenticated, persisted, and loaded as separate states. Reachability does not prove persistence, and persistence does not prove that the current session loaded the fact.
+6. For write-approval gates, treat pending/review/approve/reject as built-in write states; do not deduplicate/reconcile existing state or claim coverage for external memory providers, plugins, or custom writers.
 7. Compare one controlled fresh session only with explicit approval because launching it may create session or log state. Never delete a session to test loading.
 8. Label every claim exactly as **Observed**, **Reproduced**, **Confirmed in installed source**, **Officially documented**, **Known upstream fix**, or **Hypothesis**. Put the source beside the claim.
 
@@ -95,6 +108,7 @@ Every proposed action requires explicit approval immediately before execution, a
 - Before a destructive or difficult-to-reverse action, require a verified backup and a credible rollback procedure; name the exact scope and abort condition.
 - Keep raw memory entries, prompts, session transcripts, tokens, cookies, private paths, provider URLs, and raw logs private. Redact identifiers and retain only stable non-secret facts.
 - A provider error is not evidence that built-in memory was deleted. A missing snapshot is not permission to reset memory.
+- Existing consolidation is a separately scoped mutation needing backup, review, rollback, and verification.
 - After an approved change, repeat the original memory reproduction, verify the intended profile/home, and record residual risk. Never silently broaden scope.
 
 ## Common pitfalls and recovery

@@ -23,7 +23,7 @@ This skill assesses and classifies update state; it does not authorize an update
 
 Treat an update as ordered stages: source/install identification; readiness; verified backup and rollback prerequisites; mutual-exclusion lock/process check; source acquisition; checkout/package replacement; syntax/startup guard; dependency synchronization; config migration; Desktop rebuild where applicable; gateway/service restart; and post-update verification. Preserve evidence from the first failed stage instead of repeatedly rerunning the updater.
 
-Installed source confirms a cross-process update marker/lock, stage-specific update logic, and guarded recovery paths. Current official docs describe quick/full backup modes, interrupted-terminal protection, post-update checks, and manual rollback, but apply them only to the matching installed version and install method.
+Installed source confirms a cross-process update marker/lock, stage-specific update logic, and guarded recovery paths. Current official docs describe quick/full backup modes, interrupted-terminal protection, post-update checks, and manual rollback, but apply them only to the matching installed version and install method. Version-dependent default quick snapshots, full-mode pre-update backups, and backup-off mode are distinct.
 
 Evidence priority is explicit: current runtime and installed source outrank generic guidance. The official docs are authoritative current documentation, but version-match every update or rollback claim. Current entry points are https://hermes-agent.nousresearch.com/docs/getting-started/updating and https://hermes-agent.nousresearch.com/docs/user-guide/configuration.
 
@@ -86,7 +86,6 @@ These were confirmed in repository scripts, installed help/source, or current of
 
 - `python3 skills/emh-release-intelligence/scripts/source_status.py --offline`
 - `hermes --version`
-- `hermes version`
 - `hermes update --help`
 - `hermes status --all`
 - `hermes logs list`
@@ -99,7 +98,9 @@ The offline source-status script is the primary assessment and makes no release 
 ### Approval-gated update and recovery actions
 
 - `hermes update --check` performs network access and fetch/comparison work even though current docs state it does not modify working files or restart gateways.
-- `hermes update --backup` performs a full backup and update.
+- `hermes update --backup` creates a full safeguard and runs an update; it is not a read-only backup command.
+- `hermes backup -o <protected-backup.zip>` creates an approval-gated archive.
+- `python3 -m zipfile -t <protected-backup.zip>` is a read-only integrity probe; do not reveal archive path, inventory, or content.
 - `hermes config migrate` edits configuration interactively.
 - `hermes gateway restart` changes service state.
 - Manual `git checkout <verified-baseline>` plus dependency synchronization is rollback, not a read-only probe, and is valid only for a confirmed Git install with an exact baseline.
@@ -113,6 +114,9 @@ Never recommend `hermes update --no-backup`, `--force`, or `--force-venv` as rou
 
 - Obtain explicit approval immediately before each mutating stage; prior approval to investigate is not approval to update or recover.
 - Require a verified backup and install-method-specific rollback before update, reset, restore, dependency replacement, config migration, or service restart.
+- Require sensitive archive storage (encrypted, access-controlled) and an independent integrity check.
+- An archive is neither a tested restore point nor code rollback.
+- Track installed-version exclusions when the archive is created.
 - Preserve the original source, dirty-state summary, lock/process evidence, and first failing log window. Do not “clean up” evidence before classification.
 - Do not expose private paths, remotes, branch names, process arguments, account/profile IDs, credentials, config values, or raw logs.
 - Never run two update mechanisms concurrently or bypass a live lock.
@@ -123,6 +127,7 @@ Never recommend `hermes update --no-backup`, `--force`, or `--force-venv` as rou
 
 - **Pitfall: newer means necessary.** Recovery: require an installed-versus-current matrix and official version-matched Known upstream fix for the actual symptom.
 - **Pitfall: backup exists, therefore rollback is safe.** Recovery: verify timestamp/source version, readable inventory or integrity, protected location, required tooling, and exact restoration sequence.
+- **Pitfall: archive equals recovery point.** Recovery: the archive is neither a tested restore point nor code rollback; keep code rollback distinct from state restore and note installed-version exclusions.
 - **Pitfall: deleting a stale-looking lock.** Recovery: check age, PID liveness, process ancestry/ownership, and installed-source stale rules; request approval before cleanup.
 - **Pitfall: rerunning after a dependency failure.** Recovery: freeze the first error, identify source version versus environment version, and choose rollback or bounded completion instead of stacking installs.
 - **Pitfall: source updated but command still old.** Recovery: compare executable resolution, install path/method, venv/interpreter, and long-lived process version before another update.

@@ -21,6 +21,22 @@ Use the shared [EMH response reference](../emh-triage/references/response-templa
 
 Report provider state as separate facts: configured, reachable, authenticated, requested model available, capable of the requested context, and selected in fallback order. Also distinguish runtime detection, rate limits, endpoint identity, and local endpoint privacy. A configured provider is not necessarily authenticated, and a reachable endpoint is not proof that the requested model can serve the request.
 
+Do not introduce model IDs or direct configuration recipes.
+
+Evidence priority is explicit: current runtime and installed source outrank generic guidance. The official docs are authoritative current documentation, but provider and model behavior must be qualified against the installed version, endpoint, credential pool, and platform.
+
+## Vision routing diagnosis
+
+Use this narrow order when an image request is under review:
+
+1. Image attachment/ingress.
+2. Active provider/model and positive vision-capability identification.
+3. Native pixels-to-active-model route.
+4. Auxiliary text-description route via auxiliary.vision for text-only or unsupported route.
+5. Separate `vision_analyze` tool exposure/dispatch path.
+
+Treat `hermes tools enable --platform <platform> vision` as persistent approval-gated config that proves only tool exposure, not native image routing. Acceptance uses a fresh session and a non-sensitive image fixture; ending an OCR loop alone is insufficient. Route missing tool/schema issues to `emh-tool-runtime-diagnostics`. Keep auxiliary provider configuration/authentication/capability/fallback/destination privacy distinct.
+
 Evidence priority is explicit: current runtime and installed source outrank generic guidance. The official docs are authoritative current documentation, but provider and model behavior must be qualified against the installed version, endpoint, credential pool, and platform.
 
 ## When to Use
@@ -83,6 +99,7 @@ These commands do not authorize an inference request. `hermes auth list` is an i
 ### Approval-gated reproductions and mutations
 
 - Any provider/model inference request, endpoint health request, or external network probe contacts a provider and requires explicit approval with a named target and data boundary.
+- `hermes tools enable --platform <platform> vision` is persistent approval-gated config and proves only tool exposure, not native image routing.
 - Provider/model selection, endpoint configuration, credential add/remove/reset/logout, fallback order, privacy route, and profile configuration changes are mutations.
 - Credential installation, refresh, or raw-key inspection is never an autonomous diagnostic step.
 
@@ -93,6 +110,7 @@ Every proposed action requires explicit approval, a verified backup of configura
 **Read-only first.** Never silently switch provider/model, edit endpoint configuration, change fallback order, add/remove/reset credentials, send prompts, upload data, or alter privacy routing.
 
 - Obtain explicit approval before every provider contact, inference request, credential action, or privacy-affecting change.
+- Obtain explicit approval before an image is sent to an external auxiliary provider.
 - Require a verified backup and credible rollback before changing persistent provider/configuration/fallback state.
 - Do not equate configured with authenticated, reachable with capable, local with private, or a newer model with a Known upstream fix.
 - Redact credentials, private URLs, prompts, message content, account IDs, request IDs, endpoint headers, and raw logs. Keep provider evidence private.

@@ -74,6 +74,27 @@ EXPECTED_SKILL_VERSIONS = {
     "emh-reddit-json": "0.2.0",
 }
 
+EMH_RELEASE_SLICE_DISTRIBUTION_PATHS = (
+    ROOT / "skills/emh-update-recovery/SKILL.md",
+    ROOT / "skills/emh-provider-diagnostics/SKILL.md",
+    ROOT / "skills/emh-memory-diagnostics/SKILL.md",
+    ROOT / "CHANGELOG.md",
+)
+
+_REDDIT_PROVENANCE_MARKERS = (
+    "source_thread",
+    "proposal_score",
+    "status: PROPOSED",
+    "Community-reported",
+    "OP-confirmed",
+    "thread_id",
+)
+
+_REDDIT_URL_PATTERNS = (
+    re.compile(r"https?://(?:old|www)\.reddit\.com", re.IGNORECASE),
+    re.compile(r"reddit\.com/", re.IGNORECASE),
+)
+
 _REDDIT_JSON_PATH = re.compile(
     r"^/(?:search\.json|r/[A-Za-z0-9_-]+(?:/\.json|/search\.json|/comments/[A-Za-z0-9_-]+\.json|/about/rules\.json))$"
 )
@@ -503,6 +524,14 @@ def test_scan_text_rejects_every_nonofficial_url_form_but_allows_official_famili
     assert scan_text("official.md", "\n".join(official)) == []
     findings = scan_text("urls.md", "\n".join(nonofficial))
     assert len([finding for finding in findings if "URL" in finding]) == len(nonofficial)
+
+
+def test_emh_release_slice_changed_paths_do_not_copy_reddit_provenance_artifacts():
+    for path in EMH_RELEASE_SLICE_DISTRIBUTION_PATHS:
+        text = path.read_text(encoding="utf-8")
+        lowered = text.lower()
+        assert not any(marker.lower() in lowered for marker in _REDDIT_PROVENANCE_MARKERS), path
+        assert not any(pattern.search(text) for pattern in _REDDIT_URL_PATTERNS), path
 
 
 def test_scan_text_detects_private_memory_markers_and_hardcoded_user_path():

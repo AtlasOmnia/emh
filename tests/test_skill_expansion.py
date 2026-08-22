@@ -495,7 +495,6 @@ def test_v02_read_only_allowlists_are_exact_and_mutations_are_separate():
         "emh-update-recovery": (
             "python3 skills/emh-release-intelligence/scripts/source_status.py --offline",
             "hermes --version",
-            "hermes version",
             "hermes update --help",
             "hermes status --all",
             "hermes logs list",
@@ -575,6 +574,73 @@ def test_v02_read_only_allowlists_are_exact_and_mutations_are_separate():
         assert "verified backup" in approval_section
         assert "rollback" in approval_section
         assert "Never silently" in approval_section
+
+
+def test_reviewed_update_backup_guidance_distinguishes_archive_from_recovery_point():
+    body = skill_body("emh-update-recovery")
+    overview = section(body, "Overview").lower()
+    commands = section(body, "Exact commands and tool calls").lower()
+    safety = section(body, "Safety and approval boundaries").lower()
+    pitfalls = section(body, "Common pitfalls and recovery").lower()
+
+    assert "version-dependent default quick snapshots" in overview
+    assert "full-mode pre-update backups" in overview
+    assert "backup-off mode" in overview
+    assert "hermes update --backup" in commands
+    assert "creates a full safeguard and runs an update" in commands
+    assert "not a read-only backup command" in commands
+    assert "hermes backup -o <protected-backup.zip>" in commands
+    assert "python3 -m zipfile -t <protected-backup.zip>" in commands
+    assert "encrypted, access-controlled" in safety
+    assert "independent integrity check" in safety
+    assert "neither a tested restore point nor code rollback" in safety
+    assert "installed-version exclusions" in safety
+    assert "code rollback distinct from state restore" in pitfalls
+
+
+def test_provider_vision_guidance_separates_native_auxiliary_and_tool_paths():
+    body = skill_body("emh-provider-diagnostics")
+    overview = section(body, "Overview").lower()
+    vision = section(body, "Vision routing diagnosis").lower()
+    commands = section(body, "Exact commands and tool calls").lower()
+    safety = section(body, "Safety and approval boundaries").lower()
+
+    assert "image attachment/ingress" in vision
+    assert "active provider/model and positive vision-capability identification" in vision
+    assert "native pixels-to-active-model route" in vision
+    assert "auxiliary text-description route via auxiliary.vision" in vision
+    assert "vision_analyze" in vision
+    assert "tool exposure/dispatch path" in vision
+    assert "emh-tool-runtime-diagnostics" in vision
+    assert "hermes tools enable --platform <platform> vision" in commands
+    assert "fresh session" in vision
+    assert "non-sensitive image fixture" in vision
+    assert "ending an ocr loop alone is insufficient" in vision
+    assert "explicit approval" in safety
+    assert "external auxiliary provider" in safety
+    assert "do not introduce model ids or direct configuration recipes" in overview
+
+
+def test_memory_hygiene_guidance_gates_future_writes_without_claiming_cleanup():
+    body = skill_body("emh-memory-diagnostics")
+    overview = section(body, "Overview").lower()
+    workflow = section(body, "Evidence collection workflow").lower()
+    safety = section(body, "Safety and approval boundaries").lower()
+    pitfalls = section(body, "Common pitfalls and recovery").lower()
+
+    assert "memory.write_approval" in body
+    assert "skills.write_approval" in body
+    assert "read-only configuration checks" in overview
+    assert "preventive controls over future built-in writes" in overview
+    assert "do not deduplicate/reconcile existing state" in workflow
+    assert "pending/review/approve/reject" in workflow
+    assert "external memory providers, plugins, or custom writers" in workflow
+    assert "existing consolidation" in safety
+    assert "backup" in safety
+    assert "rollback" in safety
+    assert "verification" in safety
+    assert "durable facts/preferences" in overview
+    assert "repeatable procedures" in body
 
 
 def test_v02_escalation_packets_add_domain_specific_classification():
